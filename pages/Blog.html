@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Latest Tech Insights & News</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.blog-card:hover { transform: translateY(-4px); }
+.blog-card { transition: transform 0.3s ease; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#3b82f6',
+secondary: '#64748b'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<nav class="container mx-auto px-4 h-16 flex items-center justify-between">
+<a href="#" class="font-['Pacifico'] text-2xl text-primary">logo</a>
+<div class="hidden md:flex items-center space-x-8">
+<a href="#" class="text-gray-900 hover:text-primary">Home</a>
+<a href="#" class="text-primary font-medium">Blog</a>
+<a href="#" class="text-gray-900 hover:text-primary">About</a>
+<a href="#" class="text-gray-900 hover:text-primary">Contact</a>
+</div>
+<div class="relative w-64 hidden md:block">
+<input type="text" placeholder="Search articles..." class="w-full pl-10 pr-4 py-2 text-sm border rounded-full focus:outline-none focus:border-primary">
+<i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<button class="md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-2xl"></i>
+</button>
+</nav>
+</header>
+<main class="container mx-auto px-4 pt-24 pb-16">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="w-full md:w-3/4">
+<div class="flex items-center justify-between mb-8">
+<h1 class="text-3xl font-bold text-gray-900">Latest Articles</h1>
+<div class="flex items-center gap-4">
+<div class="relative" id="categoryFilter">
+<button class="flex items-center gap-2 px-4 py-2 border rounded-button bg-white cursor-pointer" onclick="toggleDropdown('categoryDropdown')">
+<span>All Categories</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="categoryDropdown" class="hidden absolute top-full mt-1 w-48 bg-white border rounded shadow-lg z-10">
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Technology</a>
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Design</a>
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Development</a>
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Business</a>
+</div>
+</div>
+<div class="relative" id="sortFilter">
+<button class="flex items-center gap-2 px-4 py-2 border rounded-button bg-white cursor-pointer" onclick="toggleDropdown('sortDropdown')">
+<span>Latest</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="sortDropdown" class="hidden absolute top-full mt-1 w-48 bg-white border rounded shadow-lg z-10">
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Latest</a>
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Popular</a>
+<a href="#" class="block px-4 py-2 hover:bg-gray-50">Trending</a>
+</div>
+</div>
+</div>
+</div>
+<div class="featured-post mb-12">
+<div class="bg-white rounded-lg overflow-hidden shadow-sm blog-card">
+<img src="https://public.readdy.ai/ai/img_res/50bad7a73f3b59d314e854a114d54f11.jpg" alt="Featured post" class="w-full h-[400px] object-cover object-top">
+<div class="p-6">
+<span class="inline-block px-3 py-1 text-sm font-medium text-primary bg-blue-50 rounded-full">Technology</span>
+<h2 class="mt-4 text-2xl font-bold text-gray-900">The Future of AI: Transforming Industries and Reshaping Our World</h2>
+<p class="mt-3 text-gray-600 line-clamp-2">Explore how artificial intelligence is revolutionizing various sectors, from healthcare to finance, and what this means for the future of work and society.</p>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<img src="https://public.readdy.ai/ai/img_res/8fc8dfb4cff176986f0f0d140e713442.jpg" alt="Author" class="w-10 h-10 rounded-full">
+<div>
+<p class="font-medium text-gray-900">Emily Thompson</p>
+<p class="text-sm text-gray-500">Mar 18, 2025 · 8 min read</p>
+</div>
+</div>
+<a href="/pages/AIArticleDetailPage.html" data-readdy="true" class="flex items-center gap-2 text-primary hover:text-blue-700">
+<span>Read More</span>
+<i class="ri-arrow-right-line"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white rounded-lg overflow-hidden shadow-sm blog-card">
+<img src="https://public.readdy.ai/ai/img_res/25527ea27833cc8f0b1e1e06a7aa1b48.jpg" alt="Blog post" class="w-full h-[200px] object-cover object-top">
+<div class="p-4">
+<span class="inline-block px-3 py-1 text-sm font-medium text-primary bg-blue-50 rounded-full">Development</span>
+<h3 class="mt-3 text-lg font-semibold text-gray-900">Modern Web Development: Best Practices for 2025</h3>
+<p class="mt-2 text-gray-600 text-sm line-clamp-2">Discover the latest trends and techniques in web development that are shaping the digital landscape.</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/8a60219af53030e1aef845916c13d7f8.jpg" alt="Author" class="w-8 h-8 rounded-full">
+<p class="text-sm text-gray-700">David Chen</p>
+</div>
+<p class="text-sm text-gray-500">6 min read</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg overflow-hidden shadow-sm blog-card">
+<img src="https://public.readdy.ai/ai/img_res/c61a76c6ffbd7fdec49eae5bbbb1b6d9.jpg" alt="Blog post" class="w-full h-[200px] object-cover object-top">
+<div class="p-4">
+<span class="inline-block px-3 py-1 text-sm font-medium text-primary bg-blue-50 rounded-full">Design</span>
+<h3 class="mt-3 text-lg font-semibold text-gray-900">UI/UX Design Trends That Will Dominate 2025</h3>
+<p class="mt-2 text-gray-600 text-sm line-clamp-2">Explore the evolving landscape of user interface and experience design in the coming year.</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/835cae9548aec5eb0948ab3fffb820de.jpg" alt="Author" class="w-8 h-8 rounded-full">
+<p class="text-sm text-gray-700">Sarah Anderson</p>
+</div>
+<p class="text-sm text-gray-500">5 min read</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg overflow-hidden shadow-sm blog-card">
+<img src="https://public.readdy.ai/ai/img_res/c2fd166921f0a972f870bbcb299323fb.jpg" alt="Blog post" class="w-full h-[200px] object-cover object-top">
+<div class="p-4">
+<span class="inline-block px-3 py-1 text-sm font-medium text-primary bg-blue-50 rounded-full">Business</span>
+<h3 class="mt-3 text-lg font-semibold text-gray-900">Digital Transformation Strategies for Enterprises</h3>
+<p class="mt-2 text-gray-600 text-sm line-clamp-2">Learn how leading companies are leveraging technology to drive business growth and innovation.</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/b609e9a36fc97ff8f797931b657ff63c.jpg" alt="Author" class="w-8 h-8 rounded-full">
+<p class="text-sm text-gray-700">Michael Roberts</p>
+</div>
+<p class="text-sm text-gray-500">7 min read</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<button id="loadMoreBtn" class="px-6 py-3 bg-primary text-white rounded-button hover:bg-blue-600 transition-colors cursor-pointer flex items-center gap-2">
+<span>Load More Articles</span>
+<i class="ri-loader-4-line animate-spin hidden"></i>
+</button>
+<script>
+let page = 1;
+const articlesPerPage = 3;
+const totalArticles = 12; // Simulated total number of articles
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const btnText = loadMoreBtn.querySelector('span');
+const spinner = loadMoreBtn.querySelector('.ri-loader-4-line');
+async function loadMoreArticles() {
+if (page * articlesPerPage >= totalArticles) {
+loadMoreBtn.disabled = true;
+btnText.textContent = 'No more articles';
+loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
+return;
+}
+loadMoreBtn.disabled = true;
+spinner.classList.remove('hidden');
+btnText.textContent = 'Loading...';
+try {
+// Simulate API call
+await new Promise(resolve => setTimeout(resolve, 1500));
+// Mock new articles data
+const newArticles = [
+{
+image: `https://readdy.ai/api/search-image?query=modern tech workspace with creative setup and ambient lighting&width=400&height=250&flag=7009f10a5e851c72260feb654361f6ee&seq=${10 + page * 3}&orientation=landscape`,
+category: 'Technology',
+title: `New Tech Innovation ${page + 1}`,
+description: 'Exploring the latest technological breakthroughs and their impact on our daily lives.',
+author: {
+image: `https://readdy.ai/api/search-image?query=professional headshot of a diverse tech professional&width=32&height=32&flag=a357e851cf7c6cc84ca533b22a5cfbc5&seq=${11 + page * 3}&orientation=squarish`,
+name: `John Smith ${page + 1}`
+},
+readTime: '5 min read'
+},
+{
+image: `https://readdy.ai/api/search-image?query=modern design workspace with creative tools and minimal setup&width=400&height=250&flag=81f5ab428f3dc0d014fa44be05ffa71f&seq=${12 + page * 3}&orientation=landscape`,
+category: 'Design',
+title: `Design Trends ${page + 1}`,
+description: 'Latest design trends and practices that are shaping the industry.',
+author: {
+image: `https://readdy.ai/api/search-image?query=professional headshot of a creative designer&width=32&height=32&flag=d878222542e41ea841f1b9890351f02c&seq=${13 + page * 3}&orientation=squarish`,
+name: `Emma Davis ${page + 1}`
+},
+readTime: '4 min read'
+},
+{
+image: `https://readdy.ai/api/search-image?query=modern development workspace with multiple screens and coding setup&width=400&height=250&flag=d83f3c4eefd95c8285d76f549930d389&seq=${14 + page * 3}&orientation=landscape`,
+category: 'Development',
+title: `Coding Best Practices ${page + 1}`,
+description: 'Essential coding practices for modern software development.',
+author: {
+image: `https://readdy.ai/api/search-image?query=professional headshot of a software developer&width=32&height=32&flag=2781032c7f42d53b76fc3855f66a36da&seq=${15 + page * 3}&orientation=squarish`,
+name: `Alex Johnson ${page + 1}`
+},
+readTime: '6 min read'
+}
+];
+const articleGrid = document.querySelector('.grid');
+newArticles.forEach(article => {
+const articleElement = document.createElement('div');
+articleElement.className = 'bg-white rounded-lg overflow-hidden shadow-sm blog-card';
+articleElement.innerHTML = `
+<img src="${article.image}" alt="Blog post" class="w-full h-[200px] object-cover object-top">
+<div class="p-4">
+<span class="inline-block px-3 py-1 text-sm font-medium text-primary bg-blue-50 rounded-full">${article.category}</span>
+<h3 class="mt-3 text-lg font-semibold text-gray-900">${article.title}</h3>
+<p class="mt-2 text-gray-600 text-sm line-clamp-2">${article.description}</p>
+<div class="mt-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<img src="${article.author.image}" alt="Author" class="w-8 h-8 rounded-full">
+<p class="text-sm text-gray-700">${article.author.name}</p>
+</div>
+<p class="text-sm text-gray-500">${article.readTime}</p>
+</div>
+</div>
+`;
+articleGrid.appendChild(articleElement);
+});
+page++;
+} catch (error) {
+btnText.textContent = 'Error loading articles';
+console.error('Failed to load more articles:', error);
+} finally {
+loadMoreBtn.disabled = false;
+spinner.classList.add('hidden');
+if (page * articlesPerPage < totalArticles) {
+btnText.textContent = 'Load More Articles';
+}
+}
+}
+loadMoreBtn.addEventListener('click', loadMoreArticles);
+</script>
+</div>
+</div>
+<aside class="w-full md:w-1/4">
+<div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+<h3 class="text-lg font-semibold text-gray-900 mb-4">Categories</h3>
+<div class="space-y-2">
+<a href="#" class="flex items-center justify-between py-2 text-gray-600 hover:text-primary">
+<span>Technology</span>
+<span class="text-sm text-gray-500">24</span>
+</a>
+<a href="#" class="flex items-center justify-between py-2 text-gray-600 hover:text-primary">
+<span>Design</span>
+<span class="text-sm text-gray-500">18</span>
+</a>
+<a href="#" class="flex items-center justify-between py-2 text-gray-600 hover:text-primary">
+<span>Development</span>
+<span class="text-sm text-gray-500">32</span>
+</a>
+<a href="#" class="flex items-center justify-between py-2 text-gray-600 hover:text-primary">
+<span>Business</span>
+<span class="text-sm text-gray-500">16</span>
+</a>
+</div>
+</div>
+<div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+<h3 class="text-lg font-semibold text-gray-900 mb-4">Popular Posts</h3>
+<div class="space-y-4">
+<a href="#" class="flex gap-3 group">
+<img src="https://public.readdy.ai/ai/img_res/456a9ef3cf3d34dfaecdfbfc9a82d320.jpg" alt="Popular post" class="w-20 h-20 rounded object-cover">
+<div>
+<h4 class="text-sm font-medium text-gray-900 group-hover:text-primary">Top Tech Trends to Watch in 2025</h4>
+<p class="text-xs text-gray-500 mt-1">March 15, 2025</p>
+</div>
+</a>
+<a href="#" class="flex gap-3 group">
+<img src="https://public.readdy.ai/ai/img_res/bcbc35056045c8eff0a2957f09457e5f.jpg" alt="Popular post" class="w-20 h-20 rounded object-cover">
+<div>
+<h4 class="text-sm font-medium text-gray-900 group-hover:text-primary">Remote Work Tools for Maximum Productivity</h4>
+<p class="text-xs text-gray-500 mt-1">March 12, 2025</p>
+</div>
+</a>
+</div>
+</div>
+<div class="bg-white rounded-lg p-6 shadow-sm mb-6">
+<h3 class="text-lg font-semibold text-gray-900 mb-4">Newsletter</h3>
+<p class="text-gray-600 text-sm mb-4">Stay updated with our latest insights and news.</p>
+<div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg bg-white shadow-lg transform transition-all duration-300 opacity-0 -translate-y-12 flex items-center gap-2 z-50">
+<i class="ri-checkbox-circle-line text-green-500"></i>
+<span class="text-gray-800">Successfully subscribed to newsletter!</span>
+</div>
+<form id="newsletterForm" class="space-y-3">
+<div>
+<input type="email" id="emailInput" placeholder="Your email address" class="w-full px-4 py-2 border rounded-button focus:outline-none focus:border-primary">
+<p id="errorMessage" class="text-red-500 text-sm mt-1 hidden"></p>
+</div>
+<button type="submit" id="subscribeButton" class="w-full px-4 py-2 bg-primary text-white rounded-button hover:bg-blue-600 transition-colors cursor-pointer flex items-center justify-center gap-2">
+<span>Subscribe</span>
+<i class="ri-loader-4-line animate-spin hidden"></i>
+</button>
+</form>
+<script>
+document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+const form = e.target;
+const emailInput = document.getElementById('emailInput');
+const button = document.getElementById('subscribeButton');
+const spinner = button.querySelector('.ri-loader-4-line');
+const buttonText = button.querySelector('span');
+const errorMessage = document.getElementById('errorMessage');
+const toast = document.getElementById('toast');
+const email = emailInput.value.trim();
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+errorMessage.classList.add('hidden');
+if (!emailRegex.test(email)) {
+errorMessage.textContent = 'Please enter a valid email address';
+errorMessage.classList.remove('hidden');
+return;
+}
+button.disabled = true;
+spinner.classList.remove('hidden');
+buttonText.textContent = 'Subscribing...';
+try {
+// Simulate API call
+await new Promise(resolve => setTimeout(resolve, 1500));
+// Show success toast
+toast.classList.remove('opacity-0', '-translate-y-12');
+// Reset form
+form.reset();
+// Hide toast after 3 seconds
+setTimeout(() => {
+toast.classList.add('opacity-0', '-translate-y-12');
+}, 3000);
+} catch (error) {
+errorMessage.textContent = 'Failed to subscribe. Please try again later.';
+errorMessage.classList.remove('hidden');
+} finally {
+button.disabled = false;
+spinner.classList.add('hidden');
+buttonText.textContent = 'Subscribe';
+}
+});
+</script>
+</div>
+<div class="bg-white rounded-lg p-6 shadow-sm">
+<h3 class="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
+<div class="flex gap-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200">
+<i class="ri-twitter-x-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200">
+<i class="ri-linkedin-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200">
+<i class="ri-facebook-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200">
+<i class="ri-instagram-line"></i>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<footer class="bg-slate-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+    <div>
+    <h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+    <p class="text-sm">Empowering voices through structured debate and discourse.</p>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Platform</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/DebatePlatformFeatures.html" class="hover:text-white">Features</a></li>
+    <li><a href="/pages/HowitWorks.html" class="hover:text-white">How it Works</a></li>
+    <li><a href="/pages/SubscriptionPricingPlans.html" class="hover:text-white">Pricing</a></li>
+    <li><a href="/pages/DebateHubFAQ.html" class="hover:text-white">FAQ</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Company</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/AboutUs.html" class="hover:text-white">About Us</a></li>
+    <li><a href="/pages/Blog.html" class="hover:text-white">Blog</a></li>
+    <li><a href="/pages/CareersandOpportunities.html" class="hover:text-white">Careers</a></li>
+    <li><a href="#" class="hover:text-white">Contact</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Legal</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/TermsofService.html" class="hover:text-white">Terms of Service</a></li>
+    <li><a href="/pages/PrivacyPolicy.html" data-readdy="true" class="hover:text-white">Privacy Policy</a></li>
+    <li><a href="/pages/DebateHubCookiePolicy.html"  data-readdy="true" class="hover:text-white">Cookie Policy</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+    <div class="flex gap-4 mt-4 md:mt-0">
+    <a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+    </div>
+    </div>
+    </div>
+    </footer>
+<button id="backToTop" class="fixed bottom-8 right-8 w-10 h-10 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 transition-opacity duration-300 cursor-pointer">
+<i class="ri-arrow-up-line"></i>
+</button>
+<script>
+function toggleDropdown(id) {
+const dropdown = document.getElementById(id);
+const allDropdowns = document.querySelectorAll('[id$="Dropdown"]');
+allDropdowns.forEach(d => {
+if (d.id !== id) d.classList.add('hidden');
+});
+dropdown.classList.toggle('hidden');
+}
+document.addEventListener('click', (e) => {
+if (!e.target.closest('#categoryFilter') && !e.target.closest('#sortFilter')) {
+document.querySelectorAll('[id$="Dropdown"]').forEach(d => d.classList.add('hidden'));
+}
+});
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 300) {
+backToTop.style.opacity = '1';
+} else {
+backToTop.style.opacity = '0';
+}
+});
+backToTop.addEventListener('click', () => {
+window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+</body>
+</html>

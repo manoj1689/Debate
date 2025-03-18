@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Debate Room - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2B6CB0',
+secondary: '#38B2AC'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.message-bubble {
+max-width: 80%;
+}
+.ai-typing {
+animation: typing 1s infinite;
+}
+@keyframes typing {
+0% { opacity: 0.3; }
+50% { opacity: 1; }
+100% { opacity: 0.3; }
+}
+.stage-active {
+background: #EBF5FF;
+border-color: #2B6CB0;
+color: #2B6CB0;
+}
+.send-animation {
+animation: sendSuccess 0.5s ease-out forwards;
+}
+@keyframes sendSuccess {
+0% { transform: translateY(100%); }
+100% { transform: translateY(-100%); }
+}
+.error-shake {
+animation: shake 0.4s ease-in-out;
+}
+@keyframes shake {
+0%, 100% { transform: translateX(0); }
+20% { transform: translateX(-4px); }
+40% { transform: translateX(4px); }
+60% { transform: translateX(-2px); }
+80% { transform: translateX(2px); }
+}
+</style>
+</head>
+<body class="bg-gray-50 h-screen flex flex-col">
+<header class="bg-white shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<a href="/" data-readdy="true" class="flex items-center text-gray-600 hover:text-primary">
+<i class="ri-arrow-left-line mr-2"></i>
+Back to Platform
+</a>
+<div class="h-6 w-px bg-gray-200"></div>
+<span class="font-semibold">Topic: Climate Change Impact on Global Economy</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-xl font-semibold text-primary" id="timer">05:00</div>
+<div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+<i class="ri-user-line text-gray-600"></i>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex">
+<div class="w-80 bg-white border-r border-gray-200 flex flex-col">
+<div class="p-4 border-b border-gray-200">
+<h2 class="font-semibold mb-2">Debate Progress</h2>
+<div class="space-y-3">
+<div class="p-3 rounded-lg stage-active">
+<div class="font-medium">Opening Statement</div>
+<div class="text-sm">Present your initial position</div>
+</div>
+<div class="p-3 rounded-lg border border-gray-200">
+<div class="font-medium text-gray-400">Rebuttal</div>
+<div class="text-sm text-gray-400">Counter opponent's arguments</div>
+</div>
+<div class="p-3 rounded-lg border border-gray-200">
+<div class="font-medium text-gray-400">Conclusion</div>
+<div class="text-sm text-gray-400">Summarize and reinforce position</div>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-gray-200">
+<h2 class="font-semibold mb-2">Debate Rules</h2>
+<ul class="text-sm space-y-2 text-gray-600">
+<li>• Keep responses under 200 words</li>
+<li>• Stay on topic and be respectful</li>
+<li>• Support claims with evidence</li>
+<li>• Follow time limits for each stage</li>
+</ul>
+</div>
+<div class="p-4 flex-1">
+<h2 class="font-semibold mb-2">Tips & Feedback</h2>
+<div class="space-y-3 text-sm text-gray-600">
+<p>• Structure your argument clearly</p>
+<p>• Use specific examples to support your points</p>
+<p>• Address opponent's key arguments</p>
+</div>
+</div>
+<div class="p-4 border-t border-gray-200">
+<button onclick="showEndDebateModal()" class="w-full py-2 text-red-600 hover:bg-red-50 !rounded-button whitespace-nowrap cursor-pointer">End Debate</button>
+</div>
+
+<div id="endDebateModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
+    <h3 class="text-lg font-semibold mb-4">End Debate</h3>
+    <p class="text-gray-600 mb-6">Are you sure you want to end this debate?</p>
+    <div class="flex gap-3">
+      <button onclick="hideEndDebateModal()" class="flex-1 py-2 px-4 bg-gray-100 text-gray-600 hover:bg-gray-200 !rounded-button whitespace-nowrap">Cancel</button>
+      <button onclick="endDebate()" class="flex-1 py-2 px-4 bg-red-600 text-white hover:bg-red-700 !rounded-button whitespace-nowrap">End Debate</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="flex-1 flex flex-col">
+<div class="flex-1 p-6 overflow-y-auto" id="messageContainer">
+<div class="mb-6">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+<i class="ri-robot-line text-primary"></i>
+</div>
+<div class="font-medium">AI Opponent</div>
+</div>
+<div class="message-bubble ml-11 p-4 bg-gray-100 rounded-lg">
+<p>Welcome to our debate on Climate Change Impact on Global Economy. Please present your opening statement on whether you believe climate change will have a significant negative impact on the global economy in the next decade.</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-white border-t border-gray-200">
+<div class="flex items-center gap-4 mb-4">
+<div class="text-sm text-gray-500"><span id="charCount">0</span>/200 characters</div>
+<div class="flex-1"></div>
+<button class="px-4 py-2 text-gray-600 hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer">
+<i class="ri-question-line mr-1"></i>
+Help
+</button>
+</div>
+<div class="flex gap-4">
+<textarea id="userInput" class="flex-1 p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-primary focus:border-primary" rows="3" placeholder="Type your argument here..."></textarea>
+<button id="sendButton" class="px-6 self-end py-3 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer flex items-center justify-center min-w-[100px] transition-all duration-200 relative overflow-hidden">
+<span class="flex items-center gap-2">
+<span class="button-text">Send</span>
+<span class="loading-spinner hidden">
+<i class="ri-loader-4-line animate-spin"></i>
+</span>
+</span>
+<span class="absolute inset-0 bg-white/20 translate-y-full send-animation"></span>
+</button>
+</div>
+</div>
+</div>
+<div class="w-80 bg-white border-l border-gray-200 p-4">
+<h2 class="font-semibold mb-4">Argument Analysis</h2>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span>Clarity</span>
+<span>85%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full">
+<div class="h-full w-[85%] bg-primary rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span>Evidence</span>
+<span>70%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full">
+<div class="h-full w-[70%] bg-primary rounded-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span>Relevance</span>
+<span>90%</span>
+</div>
+<div class="h-2 bg-gray-200 rounded-full">
+<div class="h-full w-[90%] bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<h3 class="font-medium mb-2">Suggested Points</h3>
+<ul class="text-sm space-y-2 text-gray-600">
+<li>• Economic impact on agriculture</li>
+<li>• Infrastructure adaptation costs</li>
+<li>• Energy sector transformation</li>
+<li>• Supply chain disruptions</li>
+</ul>
+</div>
+</div>
+</main>
+<script>
+let timeLeft = 300;
+const timerElement = document.getElementById('timer');
+const messageContainer = document.getElementById('messageContainer');
+const userInput = document.getElementById('userInput');
+const charCount = document.getElementById('charCount');
+const sendButton = document.getElementById('sendButton');
+const timer = setInterval(() => {
+timeLeft--;
+const minutes = Math.floor(timeLeft / 60);
+const seconds = timeLeft % 60;
+timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+if (timeLeft <= 0) {
+clearInterval(timer);
+}
+}, 1000);
+userInput.addEventListener('input', () => {
+charCount.textContent = userInput.value.length;
+});
+function showError(message) {
+const errorDiv = document.createElement('div');
+errorDiv.className = 'absolute -top-8 left-0 right-0 text-red-500 text-sm text-center';
+errorDiv.textContent = message;
+userInput.parentElement.appendChild(errorDiv);
+userInput.classList.add('border-red-500');
+sendButton.classList.add('error-shake');
+setTimeout(() => {
+errorDiv.remove();
+userInput.classList.remove('border-red-500');
+sendButton.classList.remove('error-shake');
+}, 3000);
+}
+sendButton.addEventListener('click', async () => {
+const content = userInput.value.trim();
+const length = content.length;
+if (length === 0 || length > 200) {
+showError(length === 0 ? 'Please enter a message' : 'Message must be less than 200 characters');
+return;
+}
+// Disable button and show loading state
+sendButton.disabled = true;
+const buttonText = sendButton.querySelector('.button-text');
+const loadingSpinner = sendButton.querySelector('.loading-spinner');
+buttonText.textContent = 'Sending';
+loadingSpinner.classList.remove('hidden');
+try {
+// Simulate network delay
+await new Promise(resolve => setTimeout(resolve, 1000));
+addMessage('user', content);
+userInput.value = '';
+charCount.textContent = '0';
+// Show success animation
+const animationElement = sendButton.querySelector('.send-animation');
+animationElement.classList.add('send-animation');
+setTimeout(() => {
+animationElement.classList.remove('send-animation');
+}, 500);
+simulateAIResponse();
+} finally {
+// Reset button state
+sendButton.disabled = false;
+buttonText.textContent = 'Send';
+loadingSpinner.classList.add('hidden');
+}
+});
+function addMessage(type, content) {
+const messageDiv = document.createElement('div');
+messageDiv.className = 'mb-6';
+if (type === 'user') {
+messageDiv.innerHTML = `
+<div class="flex items-center justify-end gap-3 mb-2">
+<div class="font-medium">You</div>
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+<i class="ri-user-line text-gray-600"></i>
+</div>
+</div>
+<div class="message-bubble mr-11 ml-auto p-4 bg-primary text-white rounded-lg">
+<p>${content}</p>
+</div>
+`;
+} else {
+messageDiv.innerHTML = `
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+<i class="ri-robot-line text-primary"></i>
+</div>
+<div class="font-medium">AI Opponent</div>
+</div>
+<div class="message-bubble ml-11 p-4 bg-gray-100 rounded-lg">
+<p>${content}</p>
+</div>
+`;
+}
+messageContainer.appendChild(messageDiv);
+messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+function simulateAIResponse() {
+const typingDiv = document.createElement('div');
+typingDiv.className = 'flex items-center gap-2 ml-11 text-sm text-gray-500 ai-typing';
+typingDiv.innerHTML = 'AI is typing<span>.</span><span>.</span><span>.</span>';
+messageContainer.appendChild(typingDiv);
+messageContainer.scrollTop = messageContainer.scrollHeight;
+setTimeout(() => {
+typingDiv.remove();
+addMessage('ai', 'Your argument raises interesting points. However, we should also consider the potential economic opportunities that climate adaptation could create, such as green technology innovation and sustainable infrastructure development. What are your thoughts on these potential offsetting factors?');
+}, 2000);
+}
+
+function showEndDebateModal() {
+  const modal = document.getElementById('endDebateModal');
+  modal.style.display = 'flex';
+}
+
+function hideEndDebateModal() {
+  const modal = document.getElementById('endDebateModal');
+  modal.style.display = 'none';
+}
+
+function endDebate() {
+  window.location.href = 'https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d';
+}
+</script>
+</body>
+</html>

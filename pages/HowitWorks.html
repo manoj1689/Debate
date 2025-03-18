@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2563EB',
+secondary: '#10B981'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px', 
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d" data-readdy="true" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d" data-readdy="true" class="text-gray-700 hover:text-primary cursor-pointer">Home</a>
+<a href="#features" class="text-gray-700 hover:text-primary cursor-pointer">Features</a>
+<a href="#pricing" class="text-gray-700 hover:text-primary cursor-pointer">Pricing</a>
+<a href="#about" class="text-gray-700 hover:text-primary cursor-pointer">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-4 py-2 text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer">Log in</button>
+<button class="px-4 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer">Sign up</button>
+</div>
+</nav>
+</header>
+
+<main class="pt-20">
+<section class="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-white overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://public.readdy.ai/ai/img_res/8fa4c99cdc28f9058d7b2c3028289fe2.jpg')] bg-cover bg-center opacity-10"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+<div class="text-center max-w-3xl mx-auto">
+<h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">How DebateHub Works</h1>
+<p class="text-xl text-gray-600 mb-8">Master the art of debate through our AI-powered platform. Follow these simple steps to begin your journey towards becoming a skilled debater.</p>
+</div>
+</div>
+</section>
+
+<section class="py-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-primary/10">
+<i class="ri-layout-grid-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">1. Choose Your Format</h3>
+<p class="text-gray-600 mb-6">Select from beginner, advanced, or custom debate formats tailored to your skill level and goals.</p>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
+<i class="ri-user-star-line text-primary"></i>
+<span class="text-sm">Beginner Mode</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
+<i class="ri-trophy-line text-primary"></i>
+<span class="text-sm">Advanced Mode</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
+<i class="ri-settings-line text-primary"></i>
+<span class="text-sm">Custom Format</span>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-primary/10">
+<i class="ri-discuss-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">2. Select Topic & Stance</h3>
+<p class="text-gray-600 mb-6">Browse trending topics or create your own. Choose your position and prepare your arguments.</p>
+<div class="space-y-4">
+<div class="relative">
+<input type="text" placeholder="Search topics..." class="w-full px-4 py-2 pr-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+<i class="ri-search-line absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<div class="space-y-2">
+<div class="p-3 rounded-lg bg-gray-50 hover:bg-gray-100 cursor-pointer">
+<div class="text-sm font-medium">Climate Change Solutions</div>
+<div class="text-xs text-gray-500 mt-1">Environmental • 2.5k debates</div>
+</div>
+<div class="p-3 rounded-lg bg-gray-50 hover:bg-gray-100 cursor-pointer">
+<div class="text-sm font-medium">Artificial Intelligence Ethics</div>
+<div class="text-xs text-gray-500 mt-1">Technology • 1.8k debates</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-primary/10">
+<i class="ri-robot-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">3. Engage in AI Debate</h3>
+<p class="text-gray-600 mb-6">Experience real-time AI interactions with instant feedback on your arguments.</p>
+<div class="space-y-4">
+<div class="p-4 rounded-lg bg-gray-50">
+<div class="flex items-start gap-3 mb-4">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+<i class="ri-user-line text-primary"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm">Renewable energy is more cost-effective in the long term.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
+<i class="ri-robot-line text-secondary"></i>
+</div>
+<div class="flex-1">
+<p class="text-sm">Consider initial infrastructure costs and implementation challenges...</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-gray-500">
+<i class="ri-timer-line"></i>
+<span>Real-time feedback</span>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 group cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-primary/10">
+<i class="ri-line-chart-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-bold text-gray-900 mb-4">4. Review Performance</h3>
+<p class="text-gray-600 mb-6">Track your progress with detailed analytics and personalized improvement suggestions.</p>
+<div class="space-y-4">
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-2xl font-bold text-primary mb-1">85%</div>
+<div class="text-sm text-gray-500">Argument Strength</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-2xl font-bold text-primary mb-1">92%</div>
+<div class="text-sm text-gray-500">Logic Score</div>
+</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-sm font-medium mb-2">Improvement Areas</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 text-sm">
+<i class="ri-check-line text-green-500"></i>
+<span>Evidence Usage</span>
+</div>
+<div class="flex items-center gap-2 text-sm">
+<i class="ri-arrow-up-line text-blue-500"></i>
+<span>Counter-Arguments</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="text-3xl font-bold text-gray-900 mb-4">Ready to Start Your Debate Journey?</h2>
+<p class="text-xl text-gray-600">Join thousands of users who are already improving their debate skills with AI assistance.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="px-8 py-4 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold flex items-center justify-center">
+<i class="ri-rocket-line mr-2"></i>
+Get Started Now
+</button>
+<button class="px-8 py-4 bg-white text-primary border-2 border-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold flex items-center justify-center">
+<i class="ri-play-circle-line mr-2"></i>
+Watch Demo
+</button>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="bg-slate-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+    <div>
+    <h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+    <p class="text-sm">Empowering voices through structured debate and discourse.</p>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Platform</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/DebatePlatformFeatures.html" class="hover:text-white">Features</a></li>
+    <li><a href="/pages/HowitWorks.html" class="hover:text-white">How it Works</a></li>
+    <li><a href="/pages/SubscriptionPricingPlans.html" class="hover:text-white">Pricing</a></li>
+    <li><a href="/pages/DebateHubFAQ.html" class="hover:text-white">FAQ</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Company</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/AboutUs.html" class="hover:text-white">About Us</a></li>
+    <li><a href="/pages/Blog.html" class="hover:text-white">Blog</a></li>
+    <li><a href="/pages/CareersandOpportunities.html" class="hover:text-white">Careers</a></li>
+    <li><a href="#" class="hover:text-white">Contact</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Legal</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/TermsofService.html" class="hover:text-white">Terms of Service</a></li>
+    <li><a href="/pages/PrivacyPolicy.html" data-readdy="true" class="hover:text-white">Privacy Policy</a></li>
+    <li><a href="/pages/DebateHubCookiePolicy.html"  data-readdy="true" class="hover:text-white">Cookie Policy</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+    <div class="flex gap-4 mt-4 md:mt-0">
+    <a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+    </div>
+    </div>
+    </div>
+    </footer>
+</body>
+</html>

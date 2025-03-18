@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debate Recordings - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2B6CB0',
+secondary: '#38B2AC'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.video-card:hover .play-button { opacity: 1; }
+.dropdown-content {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+min-width: 200px;
+z-index: 50;
+}
+.dropdown:hover .dropdown-content {
+display: block;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="#" class="text-gray-700 hover:text-primary">Home</a>
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d" data-readdy="true" class="text-primary font-medium">Debates</a>
+<a href="#" class="text-gray-700 hover:text-primary">Learn</a>
+<a href="#" class="text-gray-700 hover:text-primary">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input type="text" placeholder="Search debates..." class="w-64 px-4 py-2 pl-10 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 text-sm">
+<i class="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<button class="px-4 py-2 text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer">Log in</button>
+<button class="px-4 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer">Sign up</button>
+</div>
+</nav>
+</header>
+<main class="pt-24">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between mb-8">
+<h1 class="text-3xl font-bold text-gray-900">Featured Debates</h1>
+<div class="flex items-center gap-4">
+<div class="relative dropdown">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-lg flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+<span>Category</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div class="dropdown-content bg-white shadow-lg rounded-lg border border-gray-100 py-2">
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Politics</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Technology</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Social Issues</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Economics</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Environment</a>
+</div>
+</div>
+<div class="relative dropdown">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-lg flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+<span>Difficulty</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div class="dropdown-content bg-white shadow-lg rounded-lg border border-gray-100 py-2">
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Beginner</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Intermediate</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Advanced</a>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-white border border-gray-200 rounded-lg p-1">
+<button class="px-4 py-1 rounded-md text-sm bg-primary text-white">AI vs Human</button>
+<button class="px-4 py-1 rounded-md text-sm text-gray-700 hover:bg-gray-50">Human vs Human</button>
+</div>
+<div class="relative dropdown">
+<button class="px-4 py-2 bg-white border border-gray-200 rounded-lg flex items-center gap-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+<span>Sort by: Most Recent</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div class="dropdown-content bg-white shadow-lg rounded-lg border border-gray-100 py-2">
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Most Recent</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Most Popular</a>
+<a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Highest Rated</a>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 mb-12">
+<div class="video-card bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://public.readdy.ai/ai/img_res/c2785d3a32eaba972ee9f4fef74016ea.jpg" class="w-full h-56 object-cover" alt="Debate thumbnail">
+<div class="play-button absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity">
+<i class="ri-play-circle-line text-white text-5xl"></i>
+</div>
+<span class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">45:20</span>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Technology</span>
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Intermediate</span>
+</div>
+<h3 class="font-semibold mb-2">The Future of Artificial Intelligence in Healthcare</h3>
+<div class="flex items-center gap-3 mb-3">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/f566aabf5b0f1c098295e90d3e4e3a5b.jpg" class="w-8 h-8 rounded-full" alt="Speaker">
+<span class="text-sm text-gray-600">Dr. James Wilson</span>
+</div>
+<span class="text-gray-300">vs</span>
+<div class="flex items-center gap-2">
+<i class="ri-robot-line text-primary"></i>
+<span class="text-sm text-gray-600">AI Assistant</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-gray-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><i class="ri-eye-line"></i> 2.5k</span>
+<span class="flex items-center gap-1"><i class="ri-thumb-up-line"></i> 342</span>
+<span class="flex items-center gap-1"><i class="ri-message-2-line"></i> 28</span>
+</div>
+<span>2 days ago</span>
+</div>
+</div>
+</div>
+<div class="video-card bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://public.readdy.ai/ai/img_res/a1638b9410ec15f1033fcd3c2498eed3.jpg" class="w-full h-56 object-cover" alt="Debate thumbnail">
+<div class="play-button absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity">
+<i class="ri-play-circle-line text-white text-5xl"></i>
+</div>
+<span class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">38:15</span>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Environment</span>
+<span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Advanced</span>
+</div>
+<h3 class="font-semibold mb-2">Climate Change Solutions: Global vs Local Approaches</h3>
+<div class="flex items-center gap-3 mb-3">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/3910eace4f0b00b02fe5bee6b6726b5c.jpg" class="w-8 h-8 rounded-full" alt="Speaker">
+<span class="text-sm text-gray-600">Dr. Sarah Chen</span>
+</div>
+<span class="text-gray-300">vs</span>
+<div class="flex items-center gap-2">
+<i class="ri-robot-line text-primary"></i>
+<span class="text-sm text-gray-600">AI Assistant</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-gray-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><i class="ri-eye-line"></i> 1.8k</span>
+<span class="flex items-center gap-1"><i class="ri-thumb-up-line"></i> 256</span>
+<span class="flex items-center gap-1"><i class="ri-message-2-line"></i> 42</span>
+</div>
+<span>4 days ago</span>
+</div>
+</div>
+</div>
+<div class="video-card bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="relative">
+<img src="https://public.readdy.ai/ai/img_res/8c24ac81a60a0f4a467dce1c85ea3f00.jpg" class="w-full h-56 object-cover" alt="Debate thumbnail">
+<div class="play-button absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity">
+<i class="ri-play-circle-line text-white text-5xl"></i>
+</div>
+<span class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">52:30</span>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Economics</span>
+<span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Intermediate</span>
+</div>
+<h3 class="font-semibold mb-2">Digital Currency: The Future of Money</h3>
+<div class="flex items-center gap-3 mb-3">
+<div class="flex items-center gap-2">
+<img src="https://public.readdy.ai/ai/img_res/327ad722f3cce6c8889631489dc8009c.jpg" class="w-8 h-8 rounded-full" alt="Speaker">
+<span class="text-sm text-gray-600">Prof. Michael Brown</span>
+</div>
+<span class="text-gray-300">vs</span>
+<div class="flex items-center gap-2">
+<i class="ri-robot-line text-primary"></i>
+<span class="text-sm text-gray-600">AI Assistant</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-sm text-gray-500">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><i class="ri-eye-line"></i> 3.2k</span>
+<span class="flex items-center gap-1"><i class="ri-thumb-up-line"></i> 428</span>
+<span class="flex items-center gap-1"><i class="ri-message-2-line"></i> 56</span>
+</div>
+<span>1 week ago</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mb-16">
+<button id="loadMoreBtn" class="px-6 py-3 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50 flex items-center gap-2 cursor-pointer" onclick="loadMoreDebates()">
+<span>Load More</span>
+<i class="ri-arrow-down-s-line loading-icon"></i>
+<i class="ri-loader-4-line animate-spin loading-spinner hidden"></i>
+</button>
+</div>
+
+<script>
+let page = 1;
+const debatesGrid = document.querySelector('.grid.grid-cols-3');
+
+async function loadMoreDebates() {
+  const button = document.getElementById('loadMoreBtn');
+  const loadingIcon = button.querySelector('.loading-icon');
+  const loadingSpinner = button.querySelector('.loading-spinner');
+  const buttonText = button.querySelector('span');
+
+  // Show loading state
+  loadingIcon.classList.add('hidden');
+  loadingSpinner.classList.remove('hidden');
+  button.disabled = true;
+  buttonText.textContent = 'Loading...';
+
+  try {
+    // Simulate API call with timeout
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Mock response data
+    const newDebates = [
+      {
+        thumbnail: "https://public.readdy.ai/ai/img_res/6114764988ef57692f747650340d0d9f.jpg",
+        duration: "41:15",
+        category: "Technology",
+        difficulty: "Beginner",
+        title: "Social Media: Reshaping Society",
+        speaker: {
+          image: "https://public.readdy.ai/ai/img_res/8b649964720e8cd05ec7425eabcd4a7a.jpg",
+          name: "Emma Thompson"
+        },
+        stats: {
+          views: "1.9k",
+          likes: "287",
+          comments: "34"
+        },
+        time: "3 days ago"
+      },
+      {
+        thumbnail: "https://public.readdy.ai/ai/img_res/a796e8c95de1833bd77c06b9700e7f03.jpg",
+        duration: "35:45",
+        category: "Education",
+        difficulty: "Intermediate",
+        title: "Future of Education: Digital vs Traditional",
+        speaker: {
+          image: "https://public.readdy.ai/ai/img_res/e45137e1fcddfaef550e4d48357a76cf.jpg",
+          name: "Prof. David Martinez"
+        },
+        stats: {
+          views: "2.1k",
+          likes: "312",
+          comments: "45"
+        },
+        time: "5 days ago"
+      },
+      {
+        thumbnail: "https://public.readdy.ai/ai/img_res/8821e9045f7b76992f22e8f90a0c3182.jpg",
+        duration: "48:30",
+        category: "Healthcare",
+        difficulty: "Advanced",
+        title: "Healthcare Innovation: Ethics and Progress",
+        speaker: {
+          image: "https://public.readdy.ai/ai/img_res/436313dea114a5b27b43c700adf1236b.jpg",
+          name: "Dr. Rachel Kim"
+        },
+        stats: {
+          views: "2.8k",
+          likes: "394",
+          comments: "51"
+        },
+        time: "1 week ago"
+      }
+    ];
+
+    // Generate HTML for new debates
+    const newDebatesHTML = newDebates.map(debate => `
+      <div class="video-card bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+        <div class="relative">
+          <img src="${debate.thumbnail}" class="w-full h-56 object-cover" alt="Debate thumbnail">
+          <div class="play-button absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 transition-opacity">
+            <i class="ri-play-circle-line text-white text-5xl"></i>
+          </div>
+          <span class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">${debate.duration}</span>
+        </div>
+        <div class="p-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">${debate.category}</span>
+            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">${debate.difficulty}</span>
+          </div>
+          <h3 class="font-semibold mb-2">${debate.title}</h3>
+          <div class="flex items-center gap-3 mb-3">
+            <div class="flex items-center gap-2">
+              <img src="${debate.speaker.image}" class="w-8 h-8 rounded-full" alt="Speaker">
+              <span class="text-sm text-gray-600">${debate.speaker.name}</span>
+            </div>
+            <span class="text-gray-300">vs</span>
+            <div class="flex items-center gap-2">
+              <i class="ri-robot-line text-primary"></i>
+              <span class="text-sm text-gray-600">AI Assistant</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-sm text-gray-500">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1"><i class="ri-eye-line"></i> ${debate.stats.views}</span>
+              <span class="flex items-center gap-1"><i class="ri-thumb-up-line"></i> ${debate.stats.likes}</span>
+              <span class="flex items-center gap-1"><i class="ri-message-2-line"></i> ${debate.stats.comments}</span>
+            </div>
+            <span>${debate.time}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Append new debates to the grid
+    debatesGrid.insertAdjacentHTML('beforeend', newDebatesHTML);
+    
+    page++;
+    
+    // Hide button after loading 2 pages (simulating end of content)
+    if (page > 2) {
+      button.style.display = 'none';
+    }
+  } catch (error) {
+    console.error('Error loading more debates:', error);
+  } finally {
+    // Reset button state
+    loadingIcon.classList.remove('hidden');
+    loadingSpinner.classList.add('hidden');
+    button.disabled = false;
+    buttonText.textContent = 'Load More';
+  }
+}
+</script>
+<section class="bg-white py-12 mb-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-2xl font-bold mb-8">Popular Topics</h2>
+<div class="grid grid-cols-4 gap-6">
+<a href="#" class="group block bg-gray-50 rounded-lg p-6 hover:bg-primary/5 transition-colors">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20">
+<i class="ri-government-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Politics & Governance</h3>
+<p class="text-sm text-gray-600">Explore debates on democracy, policy, and international relations</p>
+</a>
+<a href="#" class="group block bg-gray-50 rounded-lg p-6 hover:bg-primary/5 transition-colors">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20">
+<i class="ri-leaf-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Environment</h3>
+<p class="text-sm text-gray-600">Discuss climate change, sustainability, and conservation</p>
+</a>
+<a href="#" class="group block bg-gray-50 rounded-lg p-6 hover:bg-primary/5 transition-colors">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20">
+<i class="ri-code-box-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Technology</h3>
+<p class="text-sm text-gray-600">Debate AI, digital privacy, and tech ethics</p>
+</a>
+<a href="#" class="group block bg-gray-50 rounded-lg p-6 hover:bg-primary/5 transition-colors">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/20">
+<i class="ri-heart-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Social Issues</h3>
+<p class="text-sm text-gray-600">Address equality, education, and social justice</p>
+</a>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="bg-gray-900 text-gray-400 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-4 gap-8">
+<div>
+<h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+<p class="text-sm">Empowering voices through structured debate and discourse.</p>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Platform</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">Features</a></li>
+<li><a href="#" class="hover:text-white">How it Works</a></li>
+<li><a href="#" class="hover:text-white">Pricing</a></li>
+<li><a href="#" class="hover:text-white">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Company</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">About Us</a></li>
+<li><a href="#" class="hover:text-white">Blog</a></li>
+<li><a href="#" class="hover:text-white">Careers</a></li>
+<li><a href="#" class="hover:text-white">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Legal</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">Terms of Service</a></li>
+<li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+<li><a href="#" class="hover:text-white">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+<div class="flex gap-4 mt-4 md:mt-0">
+<a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

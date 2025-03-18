@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2B6CB0',
+secondary: '#4A5568'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-50">
+<div class="flex h-screen">
+<aside class="w-64 bg-white shadow-lg">
+<div class="p-6">
+<a href="/" class="flex items-center gap-2">
+<h1 class="text-2xl font-['Pacifico'] text-primary">logo</h1>
+</a>
+</div>
+<div class="px-4">
+<div class="flex flex-col items-center mb-8">
+<div class="w-20 h-20 rounded-full bg-gray-200 mb-3 overflow-hidden">
+<img src="https://public.readdy.ai/ai/img_res/ddee0af2792efd080ba5609fbf00e908.jpg" class="w-full h-full object-cover" alt="Profile">
+</div>
+<h3 class="font-medium">Emma Thompson</h3>
+<p class="text-sm text-gray-500">Expert Debater</p>
+</div>
+<nav class="space-y-1">
+<a href="#" class="flex items-center gap-3 px-4 py-3 text-primary bg-blue-50 rounded-lg">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-dashboard-line"></i>
+</div>
+<span>Dashboard</span>
+</a>
+<a href="/" data-readdy="true" class="flex items-center gap-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-logout-box-line"></i>
+</div>
+<span>Log Out</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 overflow-auto">
+<div class="p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="text-2xl font-semibold">Welcome back, Emma!</h2>
+<p class="text-gray-500">Track your debates and engage with the community</p>
+</div>
+<div class="relative">
+<input type="text" placeholder="Search debates..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg w-64 text-sm">
+<div class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 flex items-center justify-center">
+<i class="ri-search-line text-gray-400"></i>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 mb-8">
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+<i class="ri-debate-line text-primary text-xl"></i>
+</div>
+<div>
+<h3 class="font-medium">Active Debates</h3>
+<p class="text-2xl font-semibold">12</p>
+</div>
+</div>
+<div id="activeDebatesChart" class="h-32"></div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+<i class="ri-trophy-line text-green-600 text-xl"></i>
+</div>
+<div>
+<h3 class="font-medium">Win Rate</h3>
+<p class="text-2xl font-semibold">76%</p>
+</div>
+</div>
+<div id="winRateChart" class="h-32"></div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-sm">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+<i class="ri-group-line text-orange-600 text-xl"></i>
+</div>
+<div>
+<h3 class="font-medium">Total Participants</h3>
+<p class="text-2xl font-semibold">487</p>
+</div>
+</div>
+<div id="participantsChart" class="h-32"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h3 class="font-semibold mb-4">Ongoing Debates</h3>
+<div class="space-y-4">
+<div class="p-4 border border-gray-100 rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-medium">Should AI Development Be Regulated?</h4>
+<div class="relative inline-block">
+<button id="statusDropdown" class="text-sm text-white bg-green-500 px-2 py-1 rounded cursor-pointer whitespace-nowrap">Active</button>
+<div id="statusMenu" class="hidden absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="all" data-color="bg-gray-500">All</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="active" data-color="bg-green-500">Active</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="completed" data-color="bg-gray-400">Completed</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="upcoming" data-color="bg-blue-500">Upcoming</button>
+</div>
+</div>
+</div>
+<script>
+const statusDropdown = document.getElementById('statusDropdown');
+const statusMenu = document.getElementById('statusMenu');
+statusDropdown.addEventListener('click', () => {
+statusMenu.classList.toggle('hidden');
+});
+document.addEventListener('click', (e) => {
+if (!statusDropdown.contains(e.target)) {
+statusMenu.classList.add('hidden');
+}
+});
+statusMenu.querySelectorAll('button').forEach(button => {
+button.addEventListener('click', () => {
+const status = button.dataset.status;
+const color = button.dataset.color;
+statusDropdown.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+statusDropdown.className = `text-sm text-white ${color} px-2 py-1 rounded cursor-pointer whitespace-nowrap`;
+const debatesList = document.querySelectorAll('.border.border-gray-100.rounded-lg');
+debatesList.forEach(debate => {
+if (status === 'all') {
+debate.style.display = 'block';
+} else {
+const debateStatus = debate.querySelector('span').textContent.toLowerCase();
+debate.style.display = debateStatus === status ? 'block' : 'none';
+}
+});
+statusMenu.classList.add('hidden');
+});
+});
+</script>
+</div>
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/86ac579d-635e-48a2-8a61-562cbef5d532" data-readdy="true" class="flex items-center gap-4 text-sm text-gray-500">
+<span class="flex items-center gap-1">
+<i class="ri-user-line"></i> 24 participants
+</span>
+<span class="flex items-center gap-1">
+<i class="ri-time-line"></i> 2 days left
+</span>
+</a>
+</div>
+<div class="p-4 border border-gray-100 rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-medium">Universal Basic Income: Necessity or Luxury?</h4>
+<div class="relative inline-block">
+<button id="statusDropdown" class="text-sm text-white bg-green-500 px-2 py-1 rounded cursor-pointer whitespace-nowrap">Active</button>
+<div id="statusMenu" class="hidden absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+<div class="py-1">
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="all" data-color="bg-gray-500">All</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="active" data-color="bg-green-500">Active</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="completed" data-color="bg-gray-400">Completed</button>
+<button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" data-status="upcoming" data-color="bg-blue-500">Upcoming</button>
+</div>
+</div>
+</div>
+<script>
+const statusDropdown = document.getElementById('statusDropdown');
+const statusMenu = document.getElementById('statusMenu');
+statusDropdown.addEventListener('click', () => {
+statusMenu.classList.toggle('hidden');
+});
+document.addEventListener('click', (e) => {
+if (!statusDropdown.contains(e.target)) {
+statusMenu.classList.add('hidden');
+}
+});
+statusMenu.querySelectorAll('button').forEach(button => {
+button.addEventListener('click', () => {
+const status = button.dataset.status;
+const color = button.dataset.color;
+statusDropdown.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+statusDropdown.className = `text-sm text-white ${color} px-2 py-1 rounded cursor-pointer whitespace-nowrap`;
+const debatesList = document.querySelectorAll('.border.border-gray-100.rounded-lg');
+debatesList.forEach(debate => {
+if (status === 'all') {
+debate.style.display = 'block';
+} else {
+const debateStatus = debate.querySelector('span').textContent.toLowerCase();
+debate.style.display = debateStatus === status ? 'block' : 'none';
+}
+});
+statusMenu.classList.add('hidden');
+});
+});
+</script>
+</div>
+<div class="flex items-center gap-4 text-sm text-gray-500">
+<span class="flex items-center gap-1">
+<i class="ri-user-line"></i> 18 participants
+</span>
+<span class="flex items-center gap-1">
+<i class="ri-time-line"></i> 5 days left
+</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h3 class="font-semibold mb-4">Recent Activities</h3>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-message-2-line text-primary"></i>
+</div>
+<div>
+<p class="text-sm">Your argument in <span class="font-medium">Climate Change Solutions</span> received 12 upvotes</p>
+<p class="text-xs text-gray-500">2 hours ago</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-trophy-line text-green-600"></i>
+</div>
+<div>
+<p class="text-sm">You won the debate on <span class="font-medium">Education Reform</span></p>
+<p class="text-xs text-gray-500">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<aside class="w-80 bg-white shadow-lg p-6">
+<h3 class="font-semibold mb-4">Trending Topics</h3>
+<div class="space-y-4">
+<div class="p-4 bg-gray-50 rounded-lg">
+<h4 class="font-medium mb-2">Space Exploration</h4>
+<div class="flex items-center gap-2 text-sm text-gray-500">
+<span class="flex items-center gap-1">
+<i class="ri-fire-line"></i> 234 debates
+</span>
+<span class="flex items-center gap-1">
+<i class="ri-user-line"></i> 1.2k participants
+</span>
+</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<h4 class="font-medium mb-2">Renewable Energy</h4>
+<div class="flex items-center gap-2 text-sm text-gray-500">
+<span class="flex items-center gap-1">
+<i class="ri-fire-line"></i> 189 debates
+</span>
+<span class="flex items-center gap-1">
+<i class="ri-user-line"></i> 956 participants
+</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<script>
+const charts = {
+activeDebates: {
+dom: document.getElementById('activeDebatesChart'),
+option: {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: { show: false, type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+yAxis: { show: false },
+series: [{
+type: 'line',
+data: [5, 8, 6, 9, 7, 11, 12],
+smooth: true,
+showSymbol: false,
+areaStyle: {
+color: {
+type: 'linear',
+x: 0, y: 0, x2: 0, y2: 1,
+colorStops: [{
+offset: 0, color: 'rgba(87, 181, 231, 0.2)'
+}, {
+offset: 1, color: 'rgba(87, 181, 231, 0.05)'
+}]
+}
+},
+lineStyle: { color: 'rgba(87, 181, 231, 1)' }
+}]
+}
+},
+winRate: {
+dom: document.getElementById('winRateChart'),
+option: {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: { show: false, type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+yAxis: { show: false },
+series: [{
+type: 'line',
+data: [65, 72, 68, 74, 71, 73, 76],
+smooth: true,
+showSymbol: false,
+areaStyle: {
+color: {
+type: 'linear',
+x: 0, y: 0, x2: 0, y2: 1,
+colorStops: [{
+offset: 0, color: 'rgba(141, 211, 199, 0.2)'
+}, {
+offset: 1, color: 'rgba(141, 211, 199, 0.05)'
+}]
+}
+},
+lineStyle: { color: 'rgba(141, 211, 199, 1)' }
+}]
+}
+},
+participants: {
+dom: document.getElementById('participantsChart'),
+option: {
+animation: false,
+grid: { top: 0, right: 0, bottom: 0, left: 0 },
+xAxis: { show: false, type: 'category', data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] },
+yAxis: { show: false },
+series: [{
+type: 'line',
+data: [320, 368, 412, 435, 450, 468, 487],
+smooth: true,
+showSymbol: false,
+areaStyle: {
+color: {
+type: 'linear',
+x: 0, y: 0, x2: 0, y2: 1,
+colorStops: [{
+offset: 0, color: 'rgba(251, 191, 114, 0.2)'
+}, {
+offset: 1, color: 'rgba(251, 191, 114, 0.05)'
+}]
+}
+},
+lineStyle: { color: 'rgba(251, 191, 114, 1)' }
+}]
+}
+}
+};
+Object.values(charts).forEach(({dom, option}) => {
+const chart = echarts.init(dom);
+chart.setOption(option);
+});
+window.addEventListener('resize', () => {
+Object.values(charts).forEach(({dom, option}) => {
+const chart = echarts.getInstanceByDom(dom);
+chart.resize();
+});
+});
+</script>
+</body>
+</html>

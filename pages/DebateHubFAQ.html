@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2563EB',
+secondary: '#10B981'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="/" data-readdy="true" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="/" data-readdy="true" class="text-gray-700 hover:text-primary cursor-pointer">Home</a>
+<a href="#" class="text-gray-700 hover:text-primary cursor-pointer">Debates</a>
+<a href="#" class="text-gray-700 hover:text-primary cursor-pointer">Learn</a>
+<a href="#" class="text-gray-700 hover:text-primary cursor-pointer">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+    <a href="/pages/LogintoParticipate.html"><button  class="px-4 py-2 text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer"></button>Log in</button></a>
+    <a href="/pages/DebateHubSignUp.html"><button
+        class="px-4 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer">Sign up</button></a>
+    
+    </div>
+</nav>
+</header>
+
+<main class="pt-20 min-h-screen">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="mb-12">
+<h1 class="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h1>
+<p class="text-xl text-gray-600">Find answers to common questions about DebateHub's features, pricing, and more.</p>
+</div>
+
+<div class="relative mb-8">
+<input type="text" id="faqSearch" placeholder="Search questions..." class="w-full px-12 py-4 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary text-gray-900 placeholder-gray-500">
+<i class="ri-search-line absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+</div>
+
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+<div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+<i class="ri-rocket-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Getting Started</h3>
+<p class="text-gray-600 text-sm">New to DebateHub? Start here for basic guidance.</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+<div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+<i class="ri-price-tag-3-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Pricing & Plans</h3>
+<p class="text-gray-600 text-sm">Learn about our subscription options and pricing details.</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+<div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+<i class="ri-tools-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Platform Features</h3>
+<p class="text-gray-600 text-sm">Explore our AI-powered debate tools and features.</p>
+</div>
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+<div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+<i class="ri-customer-service-2-line text-primary text-xl"></i>
+</div>
+<h3 class="font-semibold mb-2">Support</h3>
+<p class="text-gray-600 text-sm">Get help and connect with our support team.</p>
+</div>
+</div>
+
+<div class="space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" id="getting-started">
+<h2 class="text-xl font-semibold p-6 border-b border-gray-100">Getting Started</h2>
+<div class="divide-y divide-gray-100">
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">How do I create my first debate?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<p class="text-gray-600">To start your first debate:</p>
+<ol class="list-decimal list-inside mt-2 space-y-2 text-gray-600">
+<li>Click the "New Debate" button in your dashboard</li>
+<li>Choose a debate format (Beginner, Advanced, or Custom)</li>
+<li>Set your topic and position</li>
+<li>Select AI opponent difficulty</li>
+<li>Begin your debate session</li>
+</ol>
+</div>
+</div>
+
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">What debate formats are available?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<p class="text-gray-600">DebateHub offers several debate formats:</p>
+<ul class="list-disc list-inside mt-2 space-y-2 text-gray-600">
+<li>Beginner AI Debate - Perfect for newcomers</li>
+<li>Advanced AI Debate - For experienced debaters</li>
+<li>Custom Format - Design your own debate structure</li>
+<li>Tournament Mode - Compete with other users</li>
+<li>Practice Mode - Focus on specific skills</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" id="pricing">
+<h2 class="text-xl font-semibold p-6 border-b border-gray-100">Pricing & Plans</h2>
+<div class="divide-y divide-gray-100">
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">What are the subscription options?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<div class="grid md:grid-cols-3 gap-6">
+<div class="border border-gray-200 rounded-lg p-4">
+<div class="font-semibold mb-2">Free Plan</div>
+<ul class="text-sm text-gray-600 space-y-2">
+<li>5 AI debates per month</li>
+<li>Basic analytics</li>
+<li>Community access</li>
+</ul>
+</div>
+<div class="border border-primary rounded-lg p-4 bg-primary/5">
+<div class="font-semibold mb-2">Pro Plan - $19/month</div>
+<ul class="text-sm text-gray-600 space-y-2">
+<li>Unlimited AI debates</li>
+<li>Advanced analytics</li>
+<li>Priority support</li>
+<li>Custom debate formats</li>
+</ul>
+</div>
+<div class="border border-gray-200 rounded-lg p-4">
+<div class="font-semibold mb-2">Team Plan - Contact us</div>
+<ul class="text-sm text-gray-600 space-y-2">
+<li>Everything in Pro</li>
+<li>Team management</li>
+<li>API access</li>
+<li>Custom training</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">Do you offer student discounts?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<p class="text-gray-600">Yes! Students get 50% off our Pro Plan with a valid .edu email address. Additionally, we offer special pricing for educational institutions and debate clubs.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden" id="features">
+<h2 class="text-xl font-semibold p-6 border-b border-gray-100">Platform Features</h2>
+<div class="divide-y divide-gray-100">
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">What makes DebateHub's AI unique?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<p class="text-gray-600">Our AI technology features:</p>
+<ul class="list-disc list-inside mt-2 space-y-2 text-gray-600">
+<li>Real-time argument analysis</li>
+<li>Adaptive difficulty levels</li>
+<li>Personalized feedback system</li>
+<li>Multi-language support</li>
+<li>Fact-checking integration</li>
+</ul>
+</div>
+</div>
+
+<div class="faq-item cursor-pointer">
+<div class="flex items-center justify-between p-6 hover:bg-gray-50">
+<h3 class="text-gray-900">Can I track my progress?</h3>
+<i class="ri-arrow-down-s-line text-xl text-gray-400 transform transition-transform"></i>
+</div>
+<div class="faq-answer hidden px-6 pb-6">
+<p class="text-gray-600">Yes, our comprehensive analytics dashboard provides:</p>
+<ul class="list-disc list-inside mt-2 space-y-2 text-gray-600">
+<li>Debate performance metrics</li>
+<li>Skill development tracking</li>
+<li>Historical debate records</li>
+<li>Personalized improvement suggestions</li>
+<li>Achievement system</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="mt-12 bg-primary/5 rounded-xl p-8 text-center">
+<h2 class="text-2xl font-semibold mb-4">Still have questions?</h2>
+<p class="text-gray-600 mb-6">Our support team is here to help you 24/7</p>
+<button class="px-6 py-3 bg-primary text-white hover:bg-primary/90 !rounded-button inline-flex items-center gap-2">
+<i class="ri-customer-service-2-line"></i>
+Contact Support
+</button>
+</div>
+</div>
+</main>
+
+<footer class="bg-slate-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+    <div>
+    <h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+    <p class="text-sm">Empowering voices through structured debate and discourse.</p>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Platform</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/DebatePlatformFeatures.html" class="hover:text-white">Features</a></li>
+    <li><a href="/pages/HowitWorks.html" class="hover:text-white">How it Works</a></li>
+    <li><a href="/pages/SubscriptionPricingPlans.html" class="hover:text-white">Pricing</a></li>
+    <li><a href="/pages/DebateHubFAQ.html" class="hover:text-white">FAQ</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Company</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/AboutUs.html" class="hover:text-white">About Us</a></li>
+    <li><a href="/pages/Blog.html" class="hover:text-white">Blog</a></li>
+    <li><a href="/pages/CareersandOpportunities.html" class="hover:text-white">Careers</a></li>
+    <li><a href="#" class="hover:text-white">Contact</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Legal</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/TermsofService.html" class="hover:text-white">Terms of Service</a></li>
+    <li><a href="/pages/PrivacyPolicy.html" data-readdy="true" class="hover:text-white">Privacy Policy</a></li>
+    <li><a href="/pages/DebateHubCookiePolicy.html"  data-readdy="true" class="hover:text-white">Cookie Policy</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+    <div class="flex gap-4 mt-4 md:mt-0">
+    <a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+    </div>
+    </div>
+    </div>
+    </footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const faqItems = document.querySelectorAll('.faq-item');
+const searchInput = document.getElementById('faqSearch');
+
+faqItems.forEach(item => {
+item.addEventListener('click', () => {
+const answer = item.querySelector('.faq-answer');
+const arrow = item.querySelector('.ri-arrow-down-s-line');
+answer.classList.toggle('hidden');
+arrow.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+});
+});
+
+searchInput.addEventListener('input', (e) => {
+const searchTerm = e.target.value.toLowerCase();
+faqItems.forEach(item => {
+const question = item.querySelector('h3').textContent.toLowerCase();
+const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+const isMatch = question.includes(searchTerm) || answer.includes(searchTerm);
+item.closest('.faq-item').style.display = isMatch ? 'block' : 'none';
+});
+});
+});
+</script>
+</body>
+</html>

@@ -207,24 +207,16 @@ localStorage.setItem('loginCredentials', JSON.stringify(credentials));
 localStorage.removeItem('loginCredentials');
 }
 try {
-const response = await fetch('/api/auth/login', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-email: document.querySelector('input[type="text"]').value,
-password: document.getElementById('password').value
-})
-});
-const data = await response.json();
-if (response.ok) {
+const email = document.querySelector('input[type="text"]').value;
+const password = document.getElementById('password').value;
+
+if (email === 'aimobirizer@gmail.com' && password === '123456') {
 showNotification('Login successful! Redirecting...', 'success');
 setTimeout(() => {
-window.location.href = '/dashboard';
+window.location.href = '/pages/DebateHubDashboard.html';
 }, 1000);
 } else {
-throw new Error(data.message || 'Login failed');
+throw new Error('Invalid email or password');
 }
 } catch (error) {
 showNotification(error.message || 'An error occurred during login', 'error');

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Custom Debate - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2B6CB0',
+secondary: '#38B2AC'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+background: #2B6CB0;
+border-radius: 50%;
+cursor: pointer;
+}
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<header class="bg-white shadow-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center">
+<a href="/" data-readdy="true" class="flex items-center text-gray-600 hover:text-primary">
+<i class="ri-arrow-left-line mr-2"></i>
+<span>Back to Debates</span>
+</a>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<div class="grid lg:grid-cols-2 gap-12">
+<div class="space-y-8">
+<div>
+<h1 class="text-3xl font-bold text-gray-900 mb-2">Create Custom Debate</h1>
+<p class="text-gray-600">Configure your debate settings and start a personalized session with our AI.</p>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Debate Topic</label>
+<input type="text" id="topic" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm" placeholder="Enter your debate topic">
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Debate Style</label>
+<div class="relative">
+<button id="styleButton" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-left text-sm flex items-center justify-between cursor-pointer">
+<span id="selectedStyle">Select debate style</span>
+<i class="ri-arrow-down-s-line"></i>
+</button>
+<div id="styleDropdown" class="hidden absolute top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+<div class="p-2 space-y-1">
+<div class="px-3 py-2 rounded hover:bg-gray-100 cursor-pointer text-sm" onclick="selectStyle('Formal')">Formal</div>
+<div class="px-3 py-2 rounded hover:bg-gray-100 cursor-pointer text-sm" onclick="selectStyle('Casual')">Casual</div>
+<div class="px-3 py-2 rounded hover:bg-gray-100 cursor-pointer text-sm" onclick="selectStyle('Academic')">Academic</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Difficulty Level</label>
+<div class="space-y-2">
+<input type="range" id="difficulty" min="1" max="5" value="3" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+<div class="flex justify-between text-sm text-gray-500">
+<span>Easy</span>
+<span>Medium</span>
+<span>Hard</span>
+</div>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Time Limit</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative">
+<input type="number" id="minutes" min="1" max="60" value="15" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm">
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">minutes</span>
+</div>
+<button id="timePresetButton" class="px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer">Quick Presets</button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">AI Opponent Behavior</label>
+<div class="grid grid-cols-3 gap-4">
+<button class="behavior-btn px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer" data-behavior="aggressive">Aggressive</button>
+<button class="behavior-btn px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer" data-behavior="neutral">Neutral</button>
+<button class="behavior-btn px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50 !rounded-button whitespace-nowrap cursor-pointer" data-behavior="collaborative">Collaborative</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow p-6">
+<h2 class="text-xl font-semibold mb-4">Debate Preview</h2>
+<div class="space-y-4">
+<div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+<i class="ri-discuss-line text-primary text-xl"></i>
+</div>
+<div>
+<h3 class="font-medium" id="previewTopic">Topic: Select a topic to begin</h3>
+<p class="text-sm text-gray-600" id="previewStyle">Style: Not selected</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-sm text-gray-600 mb-1">Difficulty</div>
+<div class="font-medium" id="previewDifficulty">Medium</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-sm text-gray-600 mb-1">Time Limit</div>
+<div class="font-medium" id="previewTime">15 minutes</div>
+</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-lg">
+<div class="text-sm text-gray-600 mb-1">AI Behavior</div>
+<div class="font-medium" id="previewBehavior">Not selected</div>
+</div>
+</div>
+<a href="/pages/DebateSessionInterface.html" data-readdy="true">
+<button id="startDebate" class="w-full mt-6 px-6 py-3 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer flex items-center justify-center gap-2">
+<i class="ri-play-circle-line"></i>
+Start Debate
+</button>
+</a>
+</div>
+</div>
+</main>
+<script>
+document.getElementById('styleButton').addEventListener('click', () => {
+const dropdown = document.getElementById('styleDropdown');
+dropdown.classList.toggle('hidden');
+});
+function selectStyle(style) {
+document.getElementById('selectedStyle').textContent = style;
+document.getElementById('previewStyle').textContent = `Style: ${style}`;
+document.getElementById('styleDropdown').classList.add('hidden');
+}
+document.getElementById('topic').addEventListener('input', (e) => {
+document.getElementById('previewTopic').textContent = e.target.value ? `Topic: ${e.target.value}` : 'Topic: Select a topic to begin';
+});
+document.getElementById('difficulty').addEventListener('input', (e) => {
+const difficulties = ['Very Easy', 'Easy', 'Medium', 'Hard', 'Very Hard'];
+document.getElementById('previewDifficulty').textContent = difficulties[e.target.value - 1];
+});
+document.getElementById('minutes').addEventListener('input', (e) => {
+document.getElementById('previewTime').textContent = `${e.target.value} minutes`;
+});
+document.querySelectorAll('.behavior-btn').forEach(btn => {
+btn.addEventListener('click', () => {
+document.querySelectorAll('.behavior-btn').forEach(b => b.classList.remove('bg-primary', 'text-white'));
+btn.classList.add('bg-primary', 'text-white');
+document.getElementById('previewBehavior').textContent = btn.getAttribute('data-behavior');
+});
+});
+document.getElementById('startDebate').addEventListener('click', (e) => {
+const topic = document.getElementById('topic').value;
+if (!topic) {
+e.preventDefault();
+const errorDiv = document.createElement('div');
+errorDiv.className = 'fixed top-4 right-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg';
+errorDiv.textContent = 'Please enter a debate topic';
+document.body.appendChild(errorDiv);
+setTimeout(() => errorDiv.remove(), 3000);
+return;
+}
+});
+document.addEventListener('click', (e) => {
+const dropdown = document.getElementById('styleDropdown');
+const button = document.getElementById('styleButton');
+if (!dropdown.contains(e.target) && !button.contains(e.target)) {
+dropdown.classList.add('hidden');
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DebateHub - Pricing Plans</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2563EB',
+secondary: '#10B981'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+}
+.modal.active {
+display: flex;
+}
+.pricing-toggle:checked + .pricing-toggle-circle {
+transform: translateX(100%);
+}
+.pricing-toggle:checked ~ .pricing-toggle-label .yearly {
+color: #2563EB;
+}
+.pricing-toggle:not(:checked) ~ .pricing-toggle-label .monthly {
+color: #2563EB;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d" data-readdy="true" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b7f969f8-0122-43dd-afa2-db52fe81a20d" data-readdy="true" class="text-gray-700 hover:text-primary cursor-pointer">Home</a>
+<a href="#features" class="text-gray-700 hover:text-primary cursor-pointer">Features</a>
+<a href="#pricing" class="text-primary font-medium cursor-pointer">Pricing</a>
+<a href="#faq" class="text-gray-700 hover:text-primary cursor-pointer">FAQ</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button onclick="showLoginModal()" class="px-4 py-2 text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer">Log in</button>
+<button onclick="showSignupModal()" class="px-4 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer">Sign up</button>
+</div>
+</nav>
+</header>
+
+<main class="pt-20">
+<section class="py-24 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h1 class="text-4xl font-bold text-gray-900 mb-4">Simple, transparent pricing</h1>
+<p class="text-xl text-gray-600">Choose the perfect plan for your debating journey</p>
+</div>
+
+<div class="flex justify-center items-center gap-4 mb-12">
+<label class="relative inline-flex items-center cursor-pointer">
+<span class="pricing-toggle-label">
+<span class="monthly mr-3 text-primary font-medium">Monthly</span>
+</span>
+<input type="checkbox" class="pricing-toggle hidden" id="pricingToggle">
+<div class="w-14 h-7 bg-gray-200 rounded-full p-1">
+<div class="pricing-toggle-circle w-5 h-5 bg-white rounded-full transition-transform duration-300"></div>
+</div>
+<span class="pricing-toggle-label">
+<span class="yearly ml-3 text-gray-600 font-medium">Yearly</span>
+</span>
+</label>
+<span class="text-sm text-primary font-medium px-2 py-1 bg-primary/10 rounded-full">Save 20%</span>
+</div>
+
+<div class="grid md:grid-cols-3 gap-8 mb-16">
+<div class="bg-white rounded-xl p-8 border border-gray-200 hover:border-primary/20 hover:shadow-xl transition-all duration-300">
+<div class="mb-8">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Free</h3>
+<p class="text-gray-600">Perfect for getting started</p>
+<div class="mt-4">
+<span class="text-4xl font-bold">$0</span>
+<span class="text-gray-600">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>5 AI debate sessions per month</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Basic performance analytics</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Community forum access</span>
+</li>
+</ul>
+<button onclick="startFreeTrial('free')" class="w-full py-3 border-2 border-primary text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer font-medium">Get Started</button>
+</div>
+
+<div class="bg-white rounded-xl p-8 border-2 border-primary shadow-xl relative transform hover:-translate-y-1 transition-all duration-300">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2">
+<span class="bg-primary text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+</div>
+<div class="mb-8">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Pro</h3>
+<p class="text-gray-600">For serious debaters</p>
+<div class="mt-4">
+<span class="text-4xl font-bold" id="proPrice">$9.99</span>
+<span class="text-gray-600">/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Unlimited AI debate sessions</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Advanced analytics dashboard</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Custom debate scenarios</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Priority customer support</span>
+</li>
+</ul>
+<button onclick="startFreeTrial('pro')" class="w-full py-3 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer font-medium">Start Free Trial</button>
+</div>
+
+<div class="bg-white rounded-xl p-8 border border-gray-200 hover:border-primary/20 hover:shadow-xl transition-all duration-300">
+<div class="mb-8">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Enterprise</h3>
+<p class="text-gray-600">For organizations & teams</p>
+<div class="mt-4">
+<span class="text-4xl font-bold" id="enterprisePrice">$19.99</span>
+<span class="text-gray-600">/user/month</span>
+</div>
+</div>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Everything in Pro plan</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Team management dashboard</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>Custom AI training</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>24/7 dedicated support</span>
+</li>
+<li class="flex items-start gap-3">
+<i class="ri-checkbox-circle-line text-primary mt-1"></i>
+<span>API access</span>
+</li>
+</ul>
+<button onclick="contactSales()" class="w-full py-3 border-2 border-primary text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer font-medium">Contact Sales</button>
+</div>
+</div>
+
+<div class="bg-white rounded-xl p-8 border border-gray-200">
+<div class="max-w-4xl mx-auto">
+<h3 class="text-2xl font-bold text-center mb-8">Compare Plans</h3>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="border-b border-gray-200">
+<th class="py-4 px-4 text-left font-medium text-gray-500">Features</th>
+<th class="py-4 px-4 text-center font-medium text-gray-900">Free</th>
+<th class="py-4 px-4 text-center font-medium text-primary">Pro</th>
+<th class="py-4 px-4 text-center font-medium text-gray-900">Enterprise</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-4 text-gray-600">AI Debate Sessions</td>
+<td class="py-4 px-4 text-center">5/month</td>
+<td class="py-4 px-4 text-center">Unlimited</td>
+<td class="py-4 px-4 text-center">Unlimited</td>
+</tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-4 text-gray-600">Analytics</td>
+<td class="py-4 px-4 text-center">Basic</td>
+<td class="py-4 px-4 text-center">Advanced</td>
+<td class="py-4 px-4 text-center">Custom</td>
+</tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-4 text-gray-600">Support</td>
+<td class="py-4 px-4 text-center">Community</td>
+<td class="py-4 px-4 text-center">Priority</td>
+<td class="py-4 px-4 text-center">24/7 Dedicated</td>
+</tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-4 text-gray-600">Team Features</td>
+<td class="py-4 px-4 text-center"><i class="ri-close-line text-gray-400"></i></td>
+<td class="py-4 px-4 text-center"><i class="ri-close-line text-gray-400"></i></td>
+<td class="py-4 px-4 text-center"><i class="ri-checkbox-circle-line text-primary"></i></td>
+</tr>
+<tr class="border-b border-gray-200">
+<td class="py-4 px-4 text-gray-600">API Access</td>
+<td class="py-4 px-4 text-center"><i class="ri-close-line text-gray-400"></i></td>
+<td class="py-4 px-4 text-center"><i class="ri-close-line text-gray-400"></i></td>
+<td class="py-4 px-4 text-center"><i class="ri-checkbox-circle-line text-primary"></i></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="faq" class="py-24 bg-white">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+<div class="space-y-6">
+<div class="border-b border-gray-200 pb-6">
+<button class="w-full flex justify-between items-center text-left focus:outline-none" onclick="toggleFaq(0)">
+<h3 class="text-lg font-medium text-gray-900">What payment methods do you accept?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 faq-arrow transition-transform duration-300"></i>
+</button>
+<div class="faq-content hidden mt-4">
+<p class="text-gray-600">We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and for Enterprise customers, we also support wire transfers and purchase orders.</p>
+</div>
+</div>
+<div class="border-b border-gray-200 pb-6">
+<button class="w-full flex justify-between items-center text-left focus:outline-none" onclick="toggleFaq(1)">
+<h3 class="text-lg font-medium text-gray-900">Can I switch plans later?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 faq-arrow transition-transform duration-300"></i>
+</button>
+<div class="faq-content hidden mt-4">
+<p class="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. The changes will take effect at the start of your next billing cycle.</p>
+</div>
+</div>
+<div class="border-b border-gray-200 pb-6">
+<button class="w-full flex justify-between items-center text-left focus:outline-none" onclick="toggleFaq(2)">
+<h3 class="text-lg font-medium text-gray-900">Do you offer a money-back guarantee?</h3>
+<i class="ri-arrow-down-s-line text-gray-400 faq-arrow transition-transform duration-300"></i>
+</button>
+<div class="faq-content hidden mt-4">
+<p class="text-gray-600">Yes, we offer a 30-day money-back guarantee for all paid plans. If you're not satisfied with our service, we'll refund your payment, no questions asked.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-3xl font-bold mb-6">Ready to start your debate journey?</h2>
+<p class="text-xl text-gray-600 mb-8">Join thousands of debaters who are improving their skills with AI</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button onclick="showSignupModal()" class="px-8 py-4 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold">Start Free Trial</button>
+<button onclick="contactSales()" class="px-8 py-4 border-2 border-primary text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold">Contact Sales</button>
+</div>
+<p class="mt-4 text-sm text-gray-600">No credit card required</p>
+</div>
+</section>
+</main>
+<footer class="bg-slate-900 text-gray-400 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8">
+    <div>
+    <h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+    <p class="text-sm">Empowering voices through structured debate and discourse.</p>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Platform</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/DebatePlatformFeatures.html" class="hover:text-white">Features</a></li>
+    <li><a href="/pages/HowitWorks.html" class="hover:text-white">How it Works</a></li>
+    <li><a href="/pages/SubscriptionPricingPlans.html" class="hover:text-white">Pricing</a></li>
+    <li><a href="/pages/DebateHubFAQ.html" class="hover:text-white">FAQ</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Company</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/AboutUs.html" class="hover:text-white">About Us</a></li>
+    <li><a href="/pages/Blog.html" class="hover:text-white">Blog</a></li>
+    <li><a href="/pages/CareersandOpportunities.html" class="hover:text-white">Careers</a></li>
+    <li><a href="#" class="hover:text-white">Contact</a></li>
+    </ul>
+    </div>
+    <div>
+    <h4 class="text-white font-semibold mb-4">Legal</h4>
+    <ul class="space-y-2">
+    <li><a href="/pages/TermsofService.html" class="hover:text-white">Terms of Service</a></li>
+    <li><a href="/pages/PrivacyPolicy.html" data-readdy="true" class="hover:text-white">Privacy Policy</a></li>
+    <li><a href="/pages/DebateHubCookiePolicy.html"  data-readdy="true" class="hover:text-white">Cookie Policy</a></li>
+    </ul>
+    </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+    <div class="flex gap-4 mt-4 md:mt-0">
+    <a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+    <a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+    </div>
+    </div>
+    </div>
+    </footer>
+
+<div id="contactModal" class="modal">
+<div class="bg-white rounded-xl p-8 m-auto max-w-md w-full">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold">Contact Sales</h3>
+<button onclick="closeContactModal()" class="text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<form id="contactForm" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+<input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+<input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+<textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" rows="4" required></textarea>
+</div>
+<button type="submit" class="w-full py-2 bg-primary text-white hover:bg-primary/90 !rounded-button">Send Message</button>
+</form>
+</div>
+</div>
+
+<script>
+document.getElementById('pricingToggle').addEventListener('change', function() {
+const proPrice = document.getElementById('proPrice');
+const enterprisePrice = document.getElementById('enterprisePrice');
+if (this.checked) {
+proPrice.textContent = '$95.90';
+enterprisePrice.textContent = '$191.90';
+} else {
+proPrice.textContent = '$9.99';
+enterprisePrice.textContent = '$19.99';
+}
+});
+
+function toggleFaq(index) {
+const content = document.querySelectorAll('.faq-content')[index];
+const arrow = document.querySelectorAll('.faq-arrow')[index];
+content.classList.toggle('hidden');
+arrow.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+function startFreeTrial(plan) {
+window.location.href = '/signup?plan=' + plan;
+}
+
+function contactSales() {
+document.getElementById('contactModal').classList.add('active');
+}
+
+function closeContactModal() {
+document.getElementById('contactModal').classList.remove('active');
+document.getElementById('contactForm').reset();
+}
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+e.preventDefault();
+const successMessage = document.createElement('div');
+successMessage.className = 'bg-green-50 text-green-700 p-4 rounded-lg mb-4';
+successMessage.textContent = 'Thank you for your interest! Our sales team will contact you soon.';
+this.insertBefore(successMessage, this.firstChild);
+setTimeout(() => {
+closeContactModal();
+}, 2000);
+});
+</script>
+
+</body>
+</html>

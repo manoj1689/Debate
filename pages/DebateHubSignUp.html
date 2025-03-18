@@ -157,6 +157,20 @@ Already have an account?
 <p class="text-white"></p>
 </div>
 <script>
+// Mock user data
+const mockUser = {
+username: 'pawan',
+email: 'aimobirizer@gmail.com',
+password: '123456'
+};
+// Pre-fill form with mock data
+window.onload = function() {
+document.getElementById('username').value = mockUser.username;
+document.getElementById('email').value = mockUser.email;
+document.getElementById('password').value = mockUser.password;
+document.getElementById('confirmPassword').value = mockUser.password;
+document.getElementById('terms').checked = true;
+};
 document.querySelectorAll('.togglePassword').forEach(button => {
 button.addEventListener('click', function() {
 const input = this.parentElement.querySelector('input');
@@ -265,26 +279,31 @@ signupButton.disabled = true;
 signupText.classList.add('hidden');
 loadingSpinner.classList.remove('hidden');
 try {
-const response = await fetch('/api/auth/signup', {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-username: document.getElementById('username').value,
-email: email.value,
-password: password.value
-})
+// Simulating API call
+await new Promise((resolve, reject) => {
+  setTimeout(() => {
+    const mockData = {
+      username: 'pawan',
+      email: 'aimobirizer@gmail.com',
+      password: '@Password1234'
+    };
+    const inputData = {
+      username: document.getElementById('username').value,
+      email: email.value,
+      password: password.value
+    };
+    if (JSON.stringify(mockData) === JSON.stringify(inputData)) {
+      showNotification('Account created successfully! Welcome onboard!', 'success');
+      setTimeout(() => {
+        window.location.href = '/pages/DebateHubWelcome&Onboarding.html';
+      }, 1500);
+      resolve();
+    } else {
+      reject(new Error('Invalid credentials'));
+    }
+  }, 1000);
 });
-const data = await response.json();
-if (response.ok) {
-showNotification('Account created successfully! Redirecting...', 'success');
-setTimeout(() => {
-window.location.href = '/login';
-}, 1500);
-} else {
-throw new Error(data.message || 'Registration failed');
-}
+// Removed erroneous else block
 } catch (error) {
 showNotification(error.message || 'An error occurred during registration', 'error');
 } finally {
