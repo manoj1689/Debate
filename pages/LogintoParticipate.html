@@ -75,6 +75,24 @@ DEFAULT: '8px',
 </div>
 <div class="bg-white rounded-lg shadow-lg p-8">
 <h2 class="text-2xl font-semibold text-gray-800 mb-6">Log in to DebateHub</h2>
+<div class="flex items-center justify-center gap-4 mb-6">
+<button type="button" class="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors w-full">
+<i class="ri-google-fill text-[#DB4437] text-xl"></i>
+<span class="text-sm">Continue with Google</span>
+</button>
+<button type="button" class="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-button hover:bg-gray-50 transition-colors w-full">
+<i class="ri-github-fill text-gray-800 text-xl"></i>
+<span class="text-sm">Continue with Github</span>
+</button>
+</div>
+<div class="relative mb-6">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-300"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-2 bg-white text-gray-500">Or continue with email</span>
+</div>
+</div>
 <form id="loginForm" class="space-y-6">
 <div>
 <label class="block text-sm font-medium text-gray-700 mb-2">Email or username</label>
@@ -127,105 +145,125 @@ Don't have an account?
 <p class="text-white"></p>
 </div>
 <script>
-const rememberMeCheckbox = document.querySelector('.checkbox-wrapper input[type="checkbox"]');
-const emailInput = document.querySelector('input[type="text"]');
-const passwordInput = document.getElementById('password');
-document.addEventListener('DOMContentLoaded', function() {
-const savedCredentials = JSON.parse(localStorage.getItem('loginCredentials'));
-if (savedCredentials) {
-emailInput.value = savedCredentials.email || '';
-passwordInput.value = savedCredentials.password || '';
-rememberMeCheckbox.checked = true;
-}
-});
-document.getElementById('togglePassword').addEventListener('click', function() {
-const passwordInput = document.getElementById('password');
-const icon = this.querySelector('i');
-if (passwordInput.type === 'password') {
-passwordInput.type = 'text';
-icon.className = 'ri-eye-off-line text-gray-400';
-} else {
-passwordInput.type = 'password';
-icon.className = 'ri-eye-line text-gray-400';
-}
-});
-rememberMeCheckbox.addEventListener('change', function() {
-if (this.checked) {
-const credentials = {
-email: emailInput.value,
-password: passwordInput.value
-};
-localStorage.setItem('loginCredentials', JSON.stringify(credentials));
-} else {
-localStorage.removeItem('loginCredentials');
-}
-});
-function showNotification(message, type) {
-const notification = document.getElementById('notification');
-const notificationIcon = notification.querySelector('.notification-icon');
-const notificationText = notification.querySelector('p');
-notification.className = `fixed top-4 right-4 shadow-lg rounded-lg p-4 transform transition-transform duration-300 flex items-center gap-3 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
-notificationIcon.className = `notification-icon ${type === 'success' ? 'ri-checkbox-circle-line' : 'ri-error-warning-line'}`;
-notificationText.textContent = message;
-notification.classList.remove('translate-x-full', 'hidden');
-setTimeout(() => {
-notification.classList.add('translate-x-full');
-setTimeout(() => {
-notification.classList.add('hidden');
-}, 300);
-}, 3000);
-}
-function validateForm() {
-const email = document.querySelector('input[type="text"]').value;
-const password = document.getElementById('password').value;
-if (!email) {
-showNotification('Please enter your email or username', 'error');
-return false;
-}
-if (!password) {
-showNotification('Please enter your password', 'error');
-return false;
-}
-return true;
-}
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
-e.preventDefault();
-if (!validateForm()) return;
-const loginButton = document.getElementById('loginButton');
-const loginText = loginButton.querySelector('.login-text');
-const loadingSpinner = loginButton.querySelector('.loading-spinner');
-loginButton.disabled = true;
-loginText.classList.add('hidden');
-loadingSpinner.classList.remove('hidden');
-if (rememberMeCheckbox.checked) {
-const credentials = {
-email: emailInput.value,
-password: passwordInput.value
-};
-localStorage.setItem('loginCredentials', JSON.stringify(credentials));
-} else {
-localStorage.removeItem('loginCredentials');
-}
-try {
-const email = document.querySelector('input[type="text"]').value;
-const password = document.getElementById('password').value;
-
-if (email === 'aimobirizer@gmail.com' && password === '123456') {
-showNotification('Login successful! Redirecting...', 'success');
-setTimeout(() => {
-window.location.href = '/pages/DebateHubDashboard.html';
-}, 1000);
-} else {
-throw new Error('Invalid email or password');
-}
-} catch (error) {
-showNotification(error.message || 'An error occurred during login', 'error');
-} finally {
-loginButton.disabled = false;
-loginText.classList.remove('hidden');
-loadingSpinner.classList.add('hidden');
-}
-});
-</script>
+    const rememberMeCheckbox = document.querySelector('.checkbox-wrapper input[type="checkbox"]');
+    const emailInput = document.querySelector('input[type="text"]');
+    const passwordInput = document.getElementById('password');
+    
+    // Prefilled credentials
+    const defaultCredentials = {
+      email: 'john.smith@example.com',
+      password: 'password123'
+    };
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedCredentials = JSON.parse(localStorage.getItem('loginCredentials'));
+    
+      if (savedCredentials) {
+        emailInput.value = savedCredentials.email || '';
+        passwordInput.value = savedCredentials.password || '';
+        rememberMeCheckbox.checked = true;
+      } else {
+        emailInput.value = defaultCredentials.email;
+        passwordInput.value = defaultCredentials.password;
+      }
+    });
+    
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('i');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.className = 'ri-eye-off-line text-gray-400';
+      } else {
+        passwordInput.type = 'password';
+        icon.className = 'ri-eye-line text-gray-400';
+      }
+    });
+    
+    rememberMeCheckbox.addEventListener('change', function() {
+      if (this.checked) {
+        const credentials = {
+          email: emailInput.value,
+          password: passwordInput.value
+        };
+        localStorage.setItem('loginCredentials', JSON.stringify(credentials));
+      } else {
+        localStorage.removeItem('loginCredentials');
+      }
+    });
+    
+    function showNotification(message, type) {
+      const notification = document.getElementById('notification');
+      const notificationIcon = notification.querySelector('.notification-icon');
+      const notificationText = notification.querySelector('p');
+      notification.className = `fixed top-4 right-4 shadow-lg rounded-lg p-4 transform transition-transform duration-300 flex items-center gap-3 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+      notificationIcon.className = `notification-icon ${type === 'success' ? 'ri-checkbox-circle-line' : 'ri-error-warning-line'}`;
+      notificationText.textContent = message;
+      notification.classList.remove('translate-x-full', 'hidden');
+      setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+          notification.classList.add('hidden');
+        }, 300);
+      }, 3000);
+    }
+    
+    function validateForm() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+    
+      if (!email) {
+        showNotification('Please enter your email or username', 'error');
+        return false;
+      }
+      if (!password) {
+        showNotification('Please enter your password', 'error');
+        return false;
+      }
+      return true;
+    }
+    
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!validateForm()) return;
+    
+      const loginButton = document.getElementById('loginButton');
+      const loginText = loginButton.querySelector('.login-text');
+      const loadingSpinner = loginButton.querySelector('.loading-spinner');
+    
+      loginButton.disabled = true;
+      loginText.classList.add('hidden');
+      loadingSpinner.classList.remove('hidden');
+    
+      if (rememberMeCheckbox.checked) {
+        const credentials = {
+          email: emailInput.value,
+          password: passwordInput.value
+        };
+        localStorage.setItem('loginCredentials', JSON.stringify(credentials));
+      } else {
+        localStorage.removeItem('loginCredentials');
+      }
+    
+      try {
+        // Mock authentication logic
+        if (emailInput.value === defaultCredentials.email && passwordInput.value === defaultCredentials.password) {
+          showNotification('Login successful! Redirecting...', 'success');
+          setTimeout(() => {
+            window.location.href = '/pages/DebateHubDashboard.html';
+          }, 1000);
+        } else {
+          throw new Error('Invalid email or password');
+        }
+      } catch (error) {
+        showNotification(error.message || 'An error occurred during login', 'error');
+      } finally {
+        loginButton.disabled = false;
+        loginText.classList.remove('hidden');
+        loadingSpinner.classList.add('hidden');
+      }
+    });
+    </script>
+    
 </body>
 </html>
