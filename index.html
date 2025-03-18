@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DebateHub - Online Debating Platform</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2563EB', // Modern blue
+secondary: '#10B981' // Fresh green
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+z-index: 1000;
+}
+.modal.active {
+display: flex;
+}
+.modal.active > div {
+opacity: 1;
+transform: translateY(0);
+}
+.error-message {
+display: none;
+}
+.error-message.show {
+display: block;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-sm z-50">
+<nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<div class="hidden md:flex items-center gap-6">
+<a href="#home" class="text-gray-700 hover:text-primary cursor-pointer">Home</a>
+<a href="#debates" class="text-gray-700 hover:text-primary cursor-pointer">Debates</a>
+<a href="#learn" class="text-gray-700 hover:text-primary cursor-pointer">Learn</a>
+<a href="#about" class="text-gray-700 hover:text-primary cursor-pointer">About</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a href="/pages/LogintoParticipate.html"><button  class="px-4 py-2 text-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer"></button>Log in</button></a>
+<a href="/pages/DebateHubSignUp.html"><button
+    class="px-4 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer">Sign up</button></a>
+
+</div>
+</nav>
+</header>
+<main class="pt-16">
+<section class="relative bg-gradient-to-br from-blue-50 via-indigo-50 to-white overflow-hidden min-h-[90vh] flex items-center">
+<div class="absolute inset-0 bg-[url('https://public.readdy.ai/ai/img_res/0ae1a192713add67170a6ccd5b2a9b6d.jpg')] bg-cover bg-center opacity-10"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="text-center lg:text-left">
+<h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">Transform Your Debating Skills with AI Technology</h1>
+<p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">Join the next generation of critical thinkers. Our AI-powered platform provides personalized feedback, real-time analysis, and structured debate frameworks to elevate your persuasion and argumentation abilities.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+<button class="px-8 py-4 bg-primary text-white hover:bg-primary/90 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold flex items-center justify-center">
+<i class="ri-rocket-line mr-2"></i>
+Start Free Trial
+</button>
+<button onclick="showDemoVideo()" class="px-8 py-4 bg-white bg-opacity-90 text-primary border-2 border-primary hover:bg-primary/5 !rounded-button whitespace-nowrap cursor-pointer text-lg font-semibold flex items-center justify-center">
+<i class="ri-play-circle-line mr-2"></i>
+Watch Demo
+</button>
+</div>
+<div class="mt-8 flex items-center gap-8 justify-center lg:justify-start">
+<div class="flex -space-x-4">
+<img src="https://public.readdy.ai/ai/img_res/f0525ac883d83ce7e4d810c8b313fb24.jpg" class="w-12 h-12 rounded-full border-2 border-white" alt="User">
+<img src="https://public.readdy.ai/ai/img_res/f0d56dbe6f97668c6b585f4790a10b18.jpg" class="w-12 h-12 rounded-full border-2 border-white" alt="User">
+<img src="https://public.readdy.ai/ai/img_res/4f877da3012de5d6a45e4d6847491d2d.jpg" class="w-12 h-12 rounded-full border-2 border-white" alt="User">
+</div>
+<div class="text-left">
+<div class="text-primary font-bold">10,000+</div>
+<div class="text-sm text-gray-600">Active Users</div>
+</div>
+<div class="text-left">
+<div class="flex items-center">
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-fill text-yellow-400"></i>
+<i class="ri-star-half-fill text-yellow-400"></i>
+</div>
+<div class="text-sm text-gray-600">4.8/5 Rating</div>
+</div>
+</div>
+</div>
+<div class="relative hidden lg:block">
+<div class="absolute -right-4 -top-4 w-72 h-72 bg-primary/10 rounded-full filter blur-3xl"></div>
+<div class="absolute -left-4 -bottom-4 w-72 h-72 bg-secondary/10 rounded-full filter blur-3xl"></div>
+<img src="https://public.readdy.ai/ai/img_res/93b582b242ca4a94c0bc32d7a0960b13.jpg" alt="DebateHub Platform" class="rounded-xl shadow-2xl relative">
+</div>
+</div>
+</div>
+</section>
+<section class="py-32 bg-gradient-to-b from-white via-blue-50/30 to-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="text-4xl font-bold text-gray-900 mb-4">Explore Our Debate Formats</h2>
+<p class="text-xl text-gray-600">Choose from our carefully crafted debate modes designed to help you grow from beginner to expert</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow transform hover:-translate-y-1 duration-300">
+<div class="flex items-center gap-6 mb-6">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center">
+<i class="ri-ai-generate text-primary text-2xl"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-gray-900">Beginner AI Debate</h3>
+<p class="text-sm text-gray-500">Practice Mode</p>
+</div>
+</div>
+<p class="text-gray-600 mb-6 text-lg">Perfect for newcomers to develop fundamental debate skills with our supportive AI that adapts to your pace and provides constructive feedback.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<i class="ri-timer-line text-primary"></i>
+<span class="text-sm text-gray-500">15-20 min</span>
+</div>
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/4e0fa2f8-df43-4577-9530-9f0066de29bf" data-readdy="true">
+<button class="px-6 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button flex items-center gap-2">
+Start Now <i class="ri-arrow-right-line"></i>
+</button>
+</a>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow transform hover:-translate-y-1 duration-300">
+<div class="flex items-center gap-6 mb-6">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center">
+<i class="ri-brain-line text-primary text-2xl"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-gray-900">Advanced AI Debate</h3>
+<p class="text-sm text-gray-500">Challenge Mode</p>
+</div>
+</div>
+<p class="text-gray-600 mb-6 text-lg">Engage in complex debates on advanced topics with our sophisticated AI that challenges your critical thinking and argumentation skills.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<i class="ri-timer-line text-primary"></i>
+<span class="text-sm text-gray-500">25-30 min</span>
+</div>
+<button class="px-6 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button flex items-center gap-2">
+Challenge <i class="ri-arrow-right-line"></i>
+</button>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow transform hover:-translate-y-1 duration-300">
+<div class="flex items-center gap-6 mb-6">
+<div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center">
+<i class="ri-robot-line text-primary text-2xl"></i>
+</div>
+<div>
+<h3 class="text-xl font-bold text-gray-900">Custom AI Debate</h3>
+<p class="text-sm text-gray-500">Freestyle Mode</p>
+</div>
+</div>
+<p class="text-gray-600 mb-6 text-lg">Design your own debate experience by selecting topics, format, and AI behavior to create a personalized learning journey.</p>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<i class="ri-timer-line text-primary"></i>
+<span class="text-sm text-gray-500">Flexible</span>
+</div>
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/34a6b70e-a746-4ff2-b377-8a65d17bb966" data-readdy="true">
+<button class="px-6 py-2 bg-primary text-white hover:bg-primary/90 !rounded-button flex items-center gap-2">
+Create <i class="ri-arrow-right-line"></i>
+</button>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-gradient-to-br from-white to-blue-50/20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<h2 class="text-3xl font-bold text-center mb-12">Why Choose Our Platform</h2>
+<div class="grid md:grid-cols-4 gap-8">
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-ai-generate text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Advanced AI</h3>
+<p class="text-gray-600">State-of-the-art language model trained specifically for debates.</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-24-hours-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">24/7 Available</h3>
+<p class="text-gray-600">Practice anytime, anywhere with our AI debate partner.</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-feedback-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Instant Feedback</h3>
+<p class="text-gray-600">Get detailed analysis and suggestions after each debate.</p>
+</div>
+<div class="text-center">
+<div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-brain-line text-primary text-2xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Adaptive Learning</h3>
+<p class="text-gray-600">AI adjusts to your skill level for optimal learning.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="text-3xl font-bold mb-6">AI Debate Analytics</h2>
+<p class="text-gray-600 mb-8">Real-time statistics of AI-powered debates and user engagement.</p>
+<div id="statsChart" class="w-full h-80"></div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-gray-50 p-6 rounded-lg">
+<div class="text-4xl font-bold text-primary mb-2">100k+</div>
+<div class="text-gray-600">AI Debates Completed</div>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg">
+<div class="text-4xl font-bold text-primary mb-2">15+</div>
+<div class="text-gray-600">AI Debate Modes</div>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg">
+<div class="text-4xl font-bold text-primary mb-2">98%</div>
+<div class="text-gray-600">AI Response Accuracy</div>
+</div>
+<div class="bg-gray-50 p-6 rounded-lg">
+<div class="text-4xl font-bold text-primary mb-2">4.8/5</div>
+<div class="text-gray-600">User Rating</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-24 bg-gradient-to-r from-primary via-blue-500 to-indigo-600 text-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<h2 class="text-3xl font-bold mb-6">Ready to Debate with AI?</h2>
+<p class="text-xl mb-8 opacity-90">Start your journey with the most advanced AI debate partner today.</p>
+<button onclick="showSignupModal()" class="px-8 py-4 bg-white text-primary hover:bg-gray-100 !rounded-button whitespace-nowrap cursor-pointer">Get Started Now</button>
+</div>
+</section>
+<section id="about" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4">About DebateHub</h2>
+<p class="text-xl text-gray-600 max-w-3xl mx-auto">We're revolutionizing the way people learn and practice debate through artificial intelligence.</p>
+</div>
+<div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+<div>
+<img src="https://public.readdy.ai/ai/img_res/d7f7912cf362c0b5f91f92a184f31a7e.jpg" alt="Our Team" class="rounded-lg shadow-lg">
+</div>
+<div>
+<h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+<p class="text-gray-600 mb-6">At DebateHub, we believe that everyone deserves access to high-quality debate practice and feedback. Our AI-powered platform makes it possible for anyone, anywhere to enhance their critical thinking and argumentation skills.</p>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-focus-3-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-1">Innovation Focus</h4>
+<p class="text-gray-600">Continuously improving our AI technology to provide the most realistic debate experience.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-global-line text-primary"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-1">Global Access</h4>
+<p class="text-gray-600">Making debate practice accessible to everyone, regardless of location or resources.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid md:grid-cols-3 gap-8 mb-16">
+<div class="text-center">
+<div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-team-line text-primary text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Expert Team</h3>
+<p class="text-gray-600">Led by debate champions and AI researchers with years of experience.</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-award-line text-primary text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">Award Winning</h3>
+<p class="text-gray-600">Recognized for innovation in educational technology and AI applications.</p>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+<i class="ri-customer-service-2-line text-primary text-3xl"></i>
+</div>
+<h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+<p class="text-gray-600">Dedicated support team ready to help you succeed in your debate journey.</p>
+</div>
+</div>
+<div class="bg-gray-50 rounded-2xl p-8 md:p-12">
+<div class="text-center mb-8">
+<h3 class="text-2xl font-bold mb-4">Our Values</h3>
+<p class="text-gray-600">The principles that guide everything we do</p>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-shield-star-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Excellence</h4>
+<p class="text-gray-600">We strive for excellence in every aspect of our platform and service.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-heart-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Inclusivity</h4>
+<p class="text-gray-600">Creating a welcoming environment for debaters of all backgrounds.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-lightbulb-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Innovation</h4>
+<p class="text-gray-600">Pushing the boundaries of what's possible with AI technology.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+<i class="ri-group-line text-primary text-xl"></i>
+</div>
+<div>
+<h4 class="font-semibold mb-2">Community</h4>
+<p class="text-gray-600">Building a supportive community of passionate debaters.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-slate-900 text-gray-400 py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-4 gap-8">
+<div>
+<h3 class="font-['Pacifico'] text-white text-2xl mb-4">logo</h3>
+<p class="text-sm">Empowering voices through structured debate and discourse.</p>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Platform</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">Features</a></li>
+<li><a href="#" class="hover:text-white">How it Works</a></li>
+<li><a href="#" class="hover:text-white">Pricing</a></li>
+<li><a href="#" class="hover:text-white">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Company</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">About Us</a></li>
+<li><a href="#" class="hover:text-white">Blog</a></li>
+<li><a href="#" class="hover:text-white">Careers</a></li>
+<li><a href="#" class="hover:text-white">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-4">Legal</h4>
+<ul class="space-y-2">
+<li><a href="#" class="hover:text-white">Terms of Service</a></li>
+<li><a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/356147c1-213c-4022-b9aa-696de8b3bab6" data-readdy="true" class="hover:text-white">Privacy Policy</a></li>
+<li><a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/0795c195-a478-4c8d-9a6a-358dd915faaa" data-readdy="true" class="hover:text-white">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-sm">© 2025 DebateHub. All rights reserved.</p>
+<div class="flex gap-4 mt-4 md:mt-0">
+<a href="#" class="hover:text-white"><i class="ri-twitter-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-facebook-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-linkedin-line"></i></a>
+<a href="#" class="hover:text-white"><i class="ri-instagram-line"></i></a>
+</div>
+</div>
+</div>
+</footer>
+<div id="loginModal" class="modal">
+<div class="bg-white/95 backdrop-blur-lg rounded-xl p-8 m-auto max-w-md w-full shadow-xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold">sign in</h3>
+<button onclick="closeLoginModal()" class="text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<form id="loginForm" class="space-y-4">
+<div id="loginError" class="hidden bg-red-50 text-red-700 p-4 rounded-lg mb-4">
+Invalid email or password. Please try again.
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+<input type="email" id="loginEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+<input type="password" id="loginPassword" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+</div>
+<button type="submit" class="w-full py-2 bg-primary text-white hover:bg-primary/90 !rounded-button">Log in</button>
+<div class="text-center">
+<a href="#" class="text-sm text-primary hover:text-primary/80">Forgot password?</a>
+</div>
+</form>
+</div>
+</div>
+<div id="demoVideoModal" class="modal">
+<div class="bg-black/80 backdrop-blur-sm rounded-xl p-4 m-auto max-w-4xl w-full shadow-xl">
+<div class="flex justify-end mb-2">
+<button onclick="closeDemoVideo()" class="text-white/80 hover:text-white">
+<i class="ri-close-line text-2xl"></i>
+</button>
+</div>
+<div class="relative w-full" style="padding-top: 56.25%;">
+<iframe id="demoVideo" class="absolute inset-0 w-full h-full rounded-lg" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+</div>
+</div>
+<div id="signupModal" class="modal">
+<div class="bg-white rounded-lg p-8 m-auto max-w-md w-full opacity-0 translate-y-4 transition-all duration-300">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold">Sign up</h3>
+<button onclick="closeSignupModal()" class="text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-xl"></i>
+</button>
+</div>
+<div id="successMessage" class="hidden bg-green-50 text-green-700 p-4 rounded-lg mb-4">
+Account created successfully! Redirecting to dashboard...
+</div>
+<form id="signupForm" class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+<input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+<div class="error-message text-red-500 text-sm mt-1 hidden" id="usernameError"></div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+<input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+<div class="error-message text-red-500 text-sm mt-1 hidden" id="emailError"></div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+<input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" required>
+<div class="password-strength mt-2">
+<div class="h-1.5 rounded-full bg-gray-200">
+<div id="strengthIndicator" class="h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+</div>
+<p id="strengthText" class="text-xs text-gray-500 mt-1">Password strength: Too weak</p>
+</div>
+<div class="error-message text-red-500 text-sm mt-1 hidden" id="passwordError"></div>
+</div>
+<div class="flex items-start">
+<input type="checkbox" id="terms" class="mt-1" required>
+<label class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a></label>
+</div>
+<div class="error-message text-red-500 text-sm mt-1 hidden" id="termsError"></div>
+<button type="submit" class="w-full py-2 bg-primary text-white hover:bg-primary/90 !rounded-button">Create Account</button>
+<div class="relative my-6">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-300"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-2 bg-white text-gray-500">Or continue with</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button type="button" class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 !rounded-button">
+<i class="ri-google-fill mr-2 text-[#4285F4]"></i>
+Google
+</button>
+<button type="button" class="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 !rounded-button">
+<i class="ri-facebook-fill mr-2 text-[#1877F2]"></i>
+Facebook
+</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+function scrollToSection(id) {
+const element = document.querySelector(id);
+if(element) {
+element.scrollIntoView({ behavior: 'smooth' });
+}
+}
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+scrollToSection(this.getAttribute('href'));
+});
+});
+const mockData = {
+months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+users: [2000, 3500, 4800, 6200, 8100, 10000],
+debates: [800, 1500, 2300, 3400, 4200, 5000]
+};
+const chart = echarts.init(document.getElementById('statsChart'));
+const option = {
+animation: false,
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+textStyle: {
+color: '#1f2937'
+}
+},
+legend: {
+data: ['Users', 'Debates'],
+textStyle: {
+color: '#1f2937'
+}
+},
+grid: {
+top: 10,
+right: 10,
+bottom: 20,
+left: 40,
+containLabel: true
+},
+xAxis: {
+type: 'category',
+data: mockData.months,
+axisLine: {
+lineStyle: {
+color: '#d1d5db'
+}
+},
+axisLabel: {
+color: '#1f2937'
+}
+},
+yAxis: {
+type: 'value',
+axisLine: {
+lineStyle: {
+color: '#d1d5db'
+}
+},
+axisLabel: {
+color: '#1f2937'
+},
+splitLine: {
+lineStyle: {
+color: '#e5e7eb'
+}
+}
+},
+series: [
+{
+name: 'Users',
+type: 'line',
+smooth: true,
+data: mockData.users,
+itemStyle: {
+color: 'rgba(87, 181, 231, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+offset: 0,
+color: 'rgba(87, 181, 231, 0.3)'
+}, {
+offset: 1,
+color: 'rgba(87, 181, 231, 0.1)'
+}])
+},
+symbol: 'none'
+},
+{
+name: 'Debates',
+type: 'line',
+smooth: true,
+data: mockData.debates,
+itemStyle: {
+color: 'rgba(141, 211, 199, 1)'
+},
+areaStyle: {
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+offset: 0,
+color: 'rgba(141, 211, 199, 0.3)'
+}, {
+offset: 1,
+color: 'rgba(141, 211, 199, 0.1)'
+}])
+},
+symbol: 'none'
+}
+]
+};
+chart.setOption(option);
+window.addEventListener('resize', () => {
+chart.resize();
+});
+function showLoginModal() {
+document.getElementById('loginModal').classList.add('active');
+}
+function closeLoginModal() {
+document.getElementById('loginModal').classList.remove('active');
+document.getElementById('loginForm').reset();
+document.getElementById('loginError').classList.add('hidden');
+}
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+const email = document.getElementById('loginEmail').value;
+const password = document.getElementById('loginPassword').value;
+// Mock login validation
+if (email === 'demo@example.com' && password === 'password123') {
+// Successful login
+document.getElementById('loginError').classList.add('hidden');
+// Redirect to dashboard
+window.location.href = '/dashboard';
+} else {
+// Show error message
+document.getElementById('loginError').classList.remove('hidden');
+}
+});
+function showSignupModal() {
+document.getElementById('signupModal').classList.add('active');
+}
+function closeSignupModal() {
+document.getElementById('signupModal').classList.remove('active');
+resetSignupForm();
+}
+function showDemoVideo() {
+document.getElementById('demoVideoModal').classList.add('active');
+}
+function closeDemoVideo() {
+document.getElementById('demoVideoModal').classList.remove('active');
+document.getElementById('demoVideo').src = document.getElementById('demoVideo').src;
+}
+function resetSignupForm() {
+document.getElementById('signupForm').reset();
+document.getElementById('strengthIndicator').style.width = '0%';
+document.getElementById('strengthIndicator').className = 'h-full rounded-full transition-all duration-300';
+document.getElementById('strengthText').textContent = 'Password strength: Too weak';
+document.querySelectorAll('.error-message').forEach(el => el.classList.remove('show'));
+document.getElementById('successMessage').classList.add('hidden');
+}
+function validateUsername(username) {
+return username.length >= 3 && username.length <= 20;
+}
+function validateEmail(email) {
+return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+function validatePassword(password) {
+const hasNumber = /\d/.test(password);
+const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+const hasMinLength = password.length >= 8;
+let strength = 0;
+if (hasNumber) strength++;
+if (hasSpecialChar) strength++;
+if (hasMinLength) strength++;
+return {
+isValid: hasNumber && hasSpecialChar && hasMinLength,
+strength
+};
+}
+function updatePasswordStrength(password) {
+const strengthIndicator = document.getElementById('strengthIndicator');
+const strengthText = document.getElementById('strengthText');
+const { strength } = validatePassword(password);
+const strengthWidth = strength * 33.33;
+strengthIndicator.style.width = `${strengthWidth}%`;
+if (strength === 0) {
+strengthIndicator.className = 'h-full rounded-full bg-red-500 transition-all duration-300';
+strengthText.textContent = 'Password strength: Too weak';
+} else if (strength === 1) {
+strengthIndicator.className = 'h-full rounded-full bg-yellow-500 transition-all duration-300';
+strengthText.textContent = 'Password strength: Weak';
+} else if (strength === 2) {
+strengthIndicator.className = 'h-full rounded-full bg-blue-500 transition-all duration-300';
+strengthText.textContent = 'Password strength: Medium';
+} else {
+strengthIndicator.className = 'h-full rounded-full bg-green-500 transition-all duration-300';
+strengthText.textContent = 'Password strength: Strong';
+}
+}
+document.getElementById('password').addEventListener('input', (e) => {
+updatePasswordStrength(e.target.value);
+});
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+let hasError = false;
+const username = document.getElementById('username').value;
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+const terms = document.getElementById('terms').checked;
+if (!validateUsername(username)) {
+document.getElementById('usernameError').textContent = 'Username must be between 3 and 20 characters';
+document.getElementById('usernameError').classList.add('show');
+hasError = true;
+} else {
+document.getElementById('usernameError').classList.remove('show');
+}
+if (!validateEmail(email)) {
+document.getElementById('emailError').textContent = 'Please enter a valid email address';
+document.getElementById('emailError').classList.add('show');
+hasError = true;
+} else {
+document.getElementById('emailError').classList.remove('show');
+}
+if (!validatePassword(password).isValid) {
+document.getElementById('passwordError').textContent = 'Password must be at least 8 characters and contain numbers and special characters';
+document.getElementById('passwordError').classList.add('show');
+hasError = true;
+} else {
+document.getElementById('passwordError').classList.remove('show');
+}
+if (!terms) {
+document.getElementById('termsError').textContent = 'You must accept the terms and conditions';
+document.getElementById('termsError').classList.add('show');
+hasError = true;
+} else {
+document.getElementById('termsError').classList.remove('show');
+}
+if (!hasError) {
+document.getElementById('successMessage').classList.remove('hidden');
+setTimeout(() => {
+window.location.href = '/dashboard';
+}, 2000);
+}
+});
+</script>
+</body>
+</html>

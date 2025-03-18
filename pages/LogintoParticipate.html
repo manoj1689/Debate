@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - DebateHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.checkbox-wrapper input[type="checkbox"] {
+opacity: 0;
+position: absolute;
+}
+.checkbox-wrapper .custom-checkbox {
+width: 18px;
+height: 18px;
+border: 2px solid #CBD5E0;
+border-radius: 4px;
+display: inline-block;
+position: relative;
+cursor: pointer;
+transition: all 0.2s;
+}
+.checkbox-wrapper input[type="checkbox"]:checked + .custom-checkbox {
+background-color: #2B6CB0;
+border-color: #2B6CB0;
+}
+.checkbox-wrapper input[type="checkbox"]:checked + .custom-checkbox::after {
+content: '';
+position: absolute;
+left: 5px;
+top: 2px;
+width: 5px;
+height: 9px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#2B6CB0',
+secondary: '#4A5568'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+<div class="w-full max-w-md">
+<div class="text-center mb-8">
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/b8dc8a0f-fad8-49b7-ba55-00797a7b0e28" data-readdy="true" class="inline-block">
+<h1 class="text-4xl font-['Pacifico'] text-primary">logo</h1>
+</a>
+</div>
+<div class="bg-white rounded-lg shadow-lg p-8">
+<h2 class="text-2xl font-semibold text-gray-800 mb-6">Log in to DebateHub</h2>
+<form id="loginForm" class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Email or username</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<i class="ri-user-line text-gray-400"></i>
+</div>
+<input type="text" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-button text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<i class="ri-lock-line text-gray-400"></i>
+</div>
+<input type="password" id="password" class="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-button text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+<button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+<i class="ri-eye-line text-gray-400"></i>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<label class="checkbox-wrapper flex items-center cursor-pointer">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span class="text-sm text-gray-600">Remember me</span>
+</label>
+<a href="#" class="text-sm text-primary hover:text-primary/80">Forgot password?</a>
+</div>
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/24736fda-5a53-43c7-ba9f-a25fa629a77f" data-readdy="true" class="w-full">
+<button type="submit" id="loginButton" class="w-full bg-primary text-white py-2 px-4 rounded-button hover:bg-primary/90 transition duration-200 !rounded-button whitespace-nowrap cursor-pointer flex items-center justify-center">
+<span class="login-text">Log in</span>
+<div class="loading-spinner hidden">
+<div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+</div>
+</button>
+</a>
+</form>
+<div class="mt-6 text-center">
+<p class="text-sm text-gray-600">
+Don't have an account?
+<a href="https://readdy.ai/home/a6d53674-bef0-43f5-86b4-7c156bdc1d31/fe25d58e-b1f2-46c4-b5f1-c88ab3203e5a" data-readdy="true" class="text-primary hover:text-primary/80 font-medium">Sign up</a>
+</p>
+</div>
+</div>
+</div>
+<div id="notification" class="fixed top-4 right-4 shadow-lg rounded-lg p-4 transform translate-x-full transition-transform duration-300 hidden flex items-center gap-3">
+<i class="notification-icon"></i>
+<p class="text-white"></p>
+</div>
+<script>
+const rememberMeCheckbox = document.querySelector('.checkbox-wrapper input[type="checkbox"]');
+const emailInput = document.querySelector('input[type="text"]');
+const passwordInput = document.getElementById('password');
+document.addEventListener('DOMContentLoaded', function() {
+const savedCredentials = JSON.parse(localStorage.getItem('loginCredentials'));
+if (savedCredentials) {
+emailInput.value = savedCredentials.email || '';
+passwordInput.value = savedCredentials.password || '';
+rememberMeCheckbox.checked = true;
+}
+});
+document.getElementById('togglePassword').addEventListener('click', function() {
+const passwordInput = document.getElementById('password');
+const icon = this.querySelector('i');
+if (passwordInput.type === 'password') {
+passwordInput.type = 'text';
+icon.className = 'ri-eye-off-line text-gray-400';
+} else {
+passwordInput.type = 'password';
+icon.className = 'ri-eye-line text-gray-400';
+}
+});
+rememberMeCheckbox.addEventListener('change', function() {
+if (this.checked) {
+const credentials = {
+email: emailInput.value,
+password: passwordInput.value
+};
+localStorage.setItem('loginCredentials', JSON.stringify(credentials));
+} else {
+localStorage.removeItem('loginCredentials');
+}
+});
+function showNotification(message, type) {
+const notification = document.getElementById('notification');
+const notificationIcon = notification.querySelector('.notification-icon');
+const notificationText = notification.querySelector('p');
+notification.className = `fixed top-4 right-4 shadow-lg rounded-lg p-4 transform transition-transform duration-300 flex items-center gap-3 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'}`;
+notificationIcon.className = `notification-icon ${type === 'success' ? 'ri-checkbox-circle-line' : 'ri-error-warning-line'}`;
+notificationText.textContent = message;
+notification.classList.remove('translate-x-full', 'hidden');
+setTimeout(() => {
+notification.classList.add('translate-x-full');
+setTimeout(() => {
+notification.classList.add('hidden');
+}, 300);
+}, 3000);
+}
+function validateForm() {
+const email = document.querySelector('input[type="text"]').value;
+const password = document.getElementById('password').value;
+if (!email) {
+showNotification('Please enter your email or username', 'error');
+return false;
+}
+if (!password) {
+showNotification('Please enter your password', 'error');
+return false;
+}
+return true;
+}
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+e.preventDefault();
+if (!validateForm()) return;
+const loginButton = document.getElementById('loginButton');
+const loginText = loginButton.querySelector('.login-text');
+const loadingSpinner = loginButton.querySelector('.loading-spinner');
+loginButton.disabled = true;
+loginText.classList.add('hidden');
+loadingSpinner.classList.remove('hidden');
+if (rememberMeCheckbox.checked) {
+const credentials = {
+email: emailInput.value,
+password: passwordInput.value
+};
+localStorage.setItem('loginCredentials', JSON.stringify(credentials));
+} else {
+localStorage.removeItem('loginCredentials');
+}
+try {
+const response = await fetch('/api/auth/login', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: JSON.stringify({
+email: document.querySelector('input[type="text"]').value,
+password: document.getElementById('password').value
+})
+});
+const data = await response.json();
+if (response.ok) {
+showNotification('Login successful! Redirecting...', 'success');
+setTimeout(() => {
+window.location.href = '/dashboard';
+}, 1000);
+} else {
+throw new Error(data.message || 'Login failed');
+}
+} catch (error) {
+showNotification(error.message || 'An error occurred during login', 'error');
+} finally {
+loginButton.disabled = false;
+loginText.classList.remove('hidden');
+loadingSpinner.classList.add('hidden');
+}
+});
+</script>
+</body>
+</html>
